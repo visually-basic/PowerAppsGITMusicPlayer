@@ -21,7 +21,7 @@ HomeScreen As screen:
             Y: =220
             ZIndex: =66
 
-            HtmlText3 As htmlViewer:
+            SongGalleryLikeBG As htmlViewer:
                 Height: =Parent.TemplateHeight
                 HtmlText: |-
                     ="<div style='
@@ -41,7 +41,7 @@ HomeScreen As screen:
                 Width: =Self.Height
                 ZIndex: =2
 
-            PlayingSong_7 As label:
+            SongGallerySong As label:
                 AutoHeight: =true
                 Color: =RGBA(255, 255, 255, 1)
                 Font: ="Agency FB"
@@ -54,7 +54,7 @@ HomeScreen As screen:
                 Y: =20
                 ZIndex: =3
 
-            PlayingArtist_6 As label:
+            SongGalleryArtist As label:
                 AutoHeight: =true
                 Color: =RGBA(255, 255, 255, 1)
                 Font: ="Agency FB"
