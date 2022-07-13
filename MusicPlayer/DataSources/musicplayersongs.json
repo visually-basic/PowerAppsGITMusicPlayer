@@ -1,0 +1,131 @@
+[
+  {
+    "DisplayName": "musicplayersongs (Views)",
+    "Name": "_crbfe_musicplayersongs_views",
+    "RelatedEntityName": "musicplayersongs",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "152f665b-f4d5-48d3-9852-dd2da64bd284": "Active musicplayersongs",
+      "3a94a167-dacd-4a23-bc93-0f3894a16244": "musicplayersongs Associated View",
+      "a6c43b9b-4eb5-4865-97c7-9c087c8f0df5": "musicplayersongs Advanced Find View",
+      "c73d3b4f-159e-4537-a679-81414e132253": "Inactive musicplayersongs",
+      "dfdc660a-ad37-4eca-821c-1963bc978f98": "musicplayersongs Lookup View"
+    }
+  },
+  {
+    "DisplayName": "Liked (musicplayersongs)",
+    "Name": "crbfe_musicplayersongs_crbfe_liked",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "crbfe_liked",
+        "OptionSetReferenceEntityName": "musicplayersongs"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "crbfe_liked",
+    "RelatedEntityName": "musicplayersongs",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status (musicplayersongs)",
+    "Name": "crbfe_musicplayersongs_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "musicplayersongs"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "musicplayersongs",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (musicplayersongs)",
+    "Name": "crbfe_musicplayersongs_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "musicplayersongs"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "musicplayersongs",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "crbfe_musicplayersongses",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "crbfe_musicplayersongs",
+    "MaxGetRowsCount": 500,
+    "Name": "musicplayersongs",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "crbfe_albumname": "AlbumName",
+      "crbfe_artist": "Artist",
+      "crbfe_artwork": "Artwork",
+      "crbfe_artworkid": "crbfe_ArtworkId",
+      "crbfe_country": "Country",
+      "crbfe_decade": "Decade",
+      "crbfe_genre": "Genre",
+      "crbfe_library": "Library",
+      "crbfe_liked": "Liked",
+      "crbfe_musicplayersongs_AsyncOperations": "System Jobs",
+      "crbfe_musicplayersongs_BulkDeleteFailures": "Bulk Delete Failures",
+      "crbfe_musicplayersongs_DuplicateBaseRecord": "Duplicate Records (crbfe_musicplayersongs_DuplicateBaseRecord)",
+      "crbfe_musicplayersongs_DuplicateMatchingRecord": "Duplicate Records (crbfe_musicplayersongs_DuplicateMatchingRecord)",
+      "crbfe_musicplayersongs_FileAttachments": "FileAttachments",
+      "crbfe_musicplayersongs_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "crbfe_musicplayersongs_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "crbfe_musicplayersongs_ProcessSession": "Process Sessions",
+      "crbfe_musicplayersongs_SyncErrors": "Sync Errors",
+      "crbfe_musicplayersongsid": "musicplayersongs",
+      "crbfe_name": "Name",
+      "crbfe_rownumber": "RowNumber",
+      "crbfe_search": "Search",
+      "crbfe_songfile": "SongFile",
+      "crbfe_songlength": "SongLength",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "musicplayersongs",
+    "Type": "NativeCDSDataSourceInfo"
+  }
+]

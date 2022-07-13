@@ -1,0 +1,34 @@
+{
+  "678fe426-3eec-4d18-a00a-117fa77d3863": {
+    "connectionParameters": {
+      "sku": "Enterprise"
+    },
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "SharePoint",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1578/1.0.1578.2813/sharepointonline/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_sharepointonline",
+      "parameterHints": {},
+      "parameterHintsV2": {}
+    },
+    "datasets": {
+      "https://bewarethecolloscouk-my.sharepoint.com/personal/rkelsey_bewarethecollos_co_uk/": {
+        "dataSources": {
+          "SoftUIFriends": {
+            "tableName": "a983c044-6db2-4f83-be37-5e49b987cc90"
+          },
+          "SoftUISongs": {
+            "tableName": "ef604767-1790-411d-8cca-900a8ce94edf"
+          }
+        }
+      }
+    },
+    "dataSources": [
+      "SoftUISongs",
+      "SoftUIFriends"
+    ],
+    "dependencies": {},
+    "dependents": [],
+    "id": "678fe426-3eec-4d18-a00a-117fa77d3863"
+  }
+}

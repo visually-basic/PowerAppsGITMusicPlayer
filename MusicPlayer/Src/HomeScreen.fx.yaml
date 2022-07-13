@@ -1,0 +1,2822 @@
+HomeScreen As screen:
+    Fill: =RGBA(224, 224, 224, 1)
+    OnVisible: =
+
+    HomeScreenContainer As groupContainer.manualLayoutContainer:
+        Height: =Parent.Height-50
+        Width: =Parent.Width-50
+        X: =25
+        Y: =25
+        ZIndex: =3
+
+        SongsGallery As gallery.galleryVertical:
+            Height: =800
+            Items: =Filter(SortByColumns(musicplayersongs,"crbfe_rownumber",Ascending),Liked)
+            Layout: =Layout.Vertical
+            ShowScrollbar: =false
+            TemplateSize: =100
+            Visible: =ButtonGallery.Selected.Name="Library"
+            Width: =530
+            X: =150
+            Y: =220
+            ZIndex: =66
+
+            HtmlText3 As htmlViewer:
+                Height: =Parent.TemplateHeight
+                HtmlText: |-
+                    ="<div style='
+                      margin: 0;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:40%;
+                    height:40%; 
+                    border-radius: 50%;
+                    background: linear-gradient(145deg, #3a4047, #444c55);
+                    box-shadow: inset 4px 4px 8px #23272b,
+                                inset -1px -1px 3px #5d6773;'>
+                    </div>"
+                OnSelect: =Select(Parent)
+                Width: =Self.Height
+                ZIndex: =2
+
+            PlayingSong_7 As label:
+                AutoHeight: =true
+                Color: =RGBA(255, 255, 255, 1)
+                Font: ="Agency FB"
+                FontWeight: =FontWeight.Semibold
+                Height: =60
+                Size: =16
+                Text: =ThisItem.Name
+                Width: =Parent.TemplateWidth-(Self.X*2)
+                X: =90
+                Y: =20
+                ZIndex: =3
+
+            PlayingArtist_6 As label:
+                AutoHeight: =true
+                Color: =RGBA(255, 255, 255, 1)
+                Font: ="Agency FB"
+                Height: =60
+                Text: =ThisItem.Artist
+                Width: =Parent.TemplateWidth-(Self.X*2)
+                X: =90
+                Y: =50
+                ZIndex: =4
+
+            PlayBG As htmlViewer:
+                Height: =Parent.TemplateHeight
+                HtmlText: |-
+                    =If(playSong.Name<>ThisItem.Name||pauseSong=1,"<div style='
+                      margin: 0;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:55%;
+                    height:55%px; 
+                    border-radius: 50%;
+                    background: linear-gradient(145deg, #3a4047, #444c55);
+                    box-shadow:  6px 6px 12px #23272b,
+                                 -1px -1px 3px #5d6773;'>
+                    </div>","<div style='
+                      margin: 0;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:55%;
+                    height:55%px; 
+                    border-radius: 50%;
+                    background: #40474f;
+                    box-shadow: inset 4px 4px 8px #23272b,
+                                inset -4px -4px 8px #5d6773;'>
+                    </div>")
+                OnSelect: =Select(Parent)
+                Width: =Self.Height
+                X: =420
+                ZIndex: =5
+
+            imgPlay As image:
+                Height: =Parent.TemplateHeight*0.55
+                HoverFill: =RGBA(0, 0, 0, 0.2)
+                Image: |-
+                    ="data:image/svg+xml;utf8, "&EncodeUrl("<svg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px'
+                    	 viewBox='0 0 494.148 494.148' style='enable-background:new 0 0 494.148 494.148;' xml:space='preserve'>
+                    <g>
+                    	<g>
+                    		<path d='M405.284,201.188L130.804,13.28C118.128,4.596,105.356,0,94.74,0C74.216,0,61.52,16.472,61.52,44.044v406.124
+                    			c0,27.54,12.68,43.98,33.156,43.98c10.632,0,23.2-4.6,35.904-13.308l274.608-187.904c17.66-12.104,27.44-28.392,27.44-45.884
+                    			C432.632,229.572,422.964,213.288,405.284,201.188z' fill='#B9BEC4'/>
+                    	</g>
+                    </g>
+                    </svg>")
+                ImagePosition: =ImagePosition.Fill
+                OnSelect: =Set(playSong,ThisItem);Set(pauseSong,Blank());
+                PaddingBottom: =20
+                PaddingLeft: =22
+                PaddingRight: =20
+                PaddingTop: =20
+                RadiusBottomLeft: =100
+                RadiusBottomRight: =100
+                RadiusTopLeft: =100
+                RadiusTopRight: =100
+                Visible: =playSong.Name<>ThisItem.Name||pauseSong=1
+                Width: =Self.Height
+                X: =442
+                Y: =22
+                ZIndex: =7
+
+            imgPause As image:
+                Height: =Parent.TemplateHeight*0.55
+                HoverFill: =RGBA(0, 0, 0, 0.2)
+                Image: |-
+                    ="data:image/svg+xml;utf8, "&EncodeUrl("<svg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px'
+                    	 viewBox='0 0 47.607 47.607' style='enable-background:new 0 0 47.607 47.607;' xml:space='preserve'>
+                    <g>
+                    	<path d='M17.991,40.976c0,3.662-2.969,6.631-6.631,6.631l0,0c-3.662,0-6.631-2.969-6.631-6.631V6.631C4.729,2.969,7.698,0,11.36,0
+                    		l0,0c3.662,0,6.631,2.969,6.631,6.631V40.976z' fill='#37E2D5'/>
+                    	<path d='M42.877,40.976c0,3.662-2.969,6.631-6.631,6.631l0,0c-3.662,0-6.631-2.969-6.631-6.631V6.631
+                    		C29.616,2.969,32.585,0,36.246,0l0,0c3.662,0,6.631,2.969,6.631,6.631V40.976z' fill='#37E2D5'/>
+                    </g>
+                    </svg>")
+                ImagePosition: =ImagePosition.Fill
+                OnSelect: =Set(pauseSong,1)
+                PaddingBottom: =20
+                PaddingLeft: =22
+                PaddingRight: =20
+                PaddingTop: =20
+                RadiusBottomLeft: =100
+                RadiusBottomRight: =100
+                RadiusTopLeft: =100
+                RadiusTopRight: =100
+                Visible: =playSong.Name=ThisItem.Name&&IsBlank(pauseSong)
+                Width: =Self.Height
+                X: =442
+                Y: =22
+                ZIndex: =8
+
+            imgLiked As image:
+                BorderStyle: =BorderStyle.None
+                DisabledFill: =RGBA(0, 0, 0, 0)
+                Height: =100*0.4
+                HoverFill: =RGBA(0, 0, 0, 0.2)
+                Image: |-
+                    ="data:image/svg+xml;utf8, "&EncodeUrl("<svg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px'
+                    	 viewBox='0 0 51.997 51.997' style='enable-background:new 0 0 51.997 51.997;' xml:space='preserve'>
+                    <path d='M51.911,16.242C51.152,7.888,45.239,1.827,37.839,1.827c-4.93,0-9.444,2.653-11.984,6.905
+                    	c-2.517-4.307-6.846-6.906-11.697-6.906c-7.399,0-13.313,6.061-14.071,14.415c-0.06,0.369-0.306,2.311,0.442,5.478
+                    	c1.078,4.568,3.568,8.723,7.199,12.013l18.115,16.439l18.426-16.438c3.631-3.291,6.121-7.445,7.199-12.014
+                    	C52.216,18.553,51.97,16.611,51.911,16.242z' fill='#37E2D5'/>
+                    </svg>")
+                OnSelect: |-
+                    =Patch(musicplayersongs,ThisItem,{Liked:false,RowNumber:Blank()})
+                PaddingBottom: =13
+                PaddingLeft: =13
+                PaddingRight: =13
+                PaddingTop: =13
+                PressedFill: =
+                RadiusBottomLeft: =100
+                RadiusBottomRight: =100
+                RadiusTopLeft: =100
+                RadiusTopRight: =100
+                Tooltip: ="Remove from Library"
+                Visible: =ThisItem.Liked
+                Width: =100*0.4
+                X: =30
+                Y: =30
+                ZIndex: =9
+
+            imgNotLiked As image:
+                AutoDisableOnSelect: =false
+                BorderStyle: =BorderStyle.None
+                DisabledFill: =RGBA(0, 0, 0, 0)
+                Height: =100*0.4
+                HoverFill: =RGBA(0, 0, 0, 0.2)
+                Image: |-
+                    ="data:image/svg+xml;utf8, "&EncodeUrl("<svg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px'
+                    	 viewBox='0 0 51.997 51.997' style='enable-background:new 0 0 51.997 51.997;' xml:space='preserve'>
+                    <path d='M51.911,16.242C51.152,7.888,45.239,1.827,37.839,1.827c-4.93,0-9.444,2.653-11.984,6.905
+                    	c-2.517-4.307-6.846-6.906-11.697-6.906c-7.399,0-13.313,6.061-14.071,14.415c-0.06,0.369-0.306,2.311,0.442,5.478
+                    	c1.078,4.568,3.568,8.723,7.199,12.013l18.115,16.439l18.426-16.438c3.631-3.291,6.121-7.445,7.199-12.014
+                    	C52.216,18.553,51.97,16.611,51.911,16.242z' fill='#B9BEC4'/>
+                    </svg>")
+                OnSelect: |-
+                    =Patch(musicplayersongs,ThisItem,{Liked:true,RowNumber:First(SortByColumns(musicplayersongs,"crbfe_rownumber",Descending)).RowNumber+1})
+                PaddingBottom: =13
+                PaddingLeft: =13
+                PaddingRight: =13
+                PaddingTop: =13
+                PressedFill: =
+                RadiusBottomLeft: =100
+                RadiusBottomRight: =100
+                RadiusTopLeft: =100
+                RadiusTopRight: =100
+                Tooltip: ="Add to Library"
+                Visible: =!ThisItem.Liked
+                Width: =100*0.4
+                X: =30
+                Y: =30
+                ZIndex: =10
+
+        PlayIMGLiked As image:
+            AutoDisableOnSelect: =false
+            BorderStyle: =BorderStyle.None
+            DisabledFill: =RGBA(0, 0, 0, 0)
+            HoverFill: =RGBA(0,0,0,0)
+            Image: |-
+                ="data:image/svg+xml;utf8, "&EncodeUrl("<svg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px'
+                	 viewBox='0 0 51.997 51.997' style='enable-background:new 0 0 51.997 51.997;' xml:space='preserve'>
+                <path d='M51.911,16.242C51.152,7.888,45.239,1.827,37.839,1.827c-4.93,0-9.444,2.653-11.984,6.905
+                	c-2.517-4.307-6.846-6.906-11.697-6.906c-7.399,0-13.313,6.061-14.071,14.415c-0.06,0.369-0.306,2.311,0.442,5.478
+                	c1.078,4.568,3.568,8.723,7.199,12.013l18.115,16.439l18.426-16.438c3.631-3.291,6.121-7.445,7.199-12.014
+                	C52.216,18.553,51.97,16.611,51.911,16.242z' fill='#37E2D5'/>
+                </svg>")
+            PaddingBottom: =43
+            PaddingLeft: =43
+            PaddingRight: =43
+            PaddingTop: =43
+            PressedFill: =RGBA(0,0,0,0)
+            Visible: =playSong.Liked
+            X: =50
+            Y: =1042
+            ZIndex: =67
+
+        PlayingIMGNotLiked As image:
+            AutoDisableOnSelect: =false
+            BorderStyle: =BorderStyle.None
+            HoverFill: =RGBA(0,0,0,0)
+            Image: |-
+                ="data:image/svg+xml;utf8, "&EncodeUrl("<svg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px'
+                	 viewBox='0 0 51.997 51.997' style='enable-background:new 0 0 51.997 51.997;' xml:space='preserve'>
+                <path d='M51.911,16.242C51.152,7.888,45.239,1.827,37.839,1.827c-4.93,0-9.444,2.653-11.984,6.905
+                	c-2.517-4.307-6.846-6.906-11.697-6.906c-7.399,0-13.313,6.061-14.071,14.415c-0.06,0.369-0.306,2.311,0.442,5.478
+                	c1.078,4.568,3.568,8.723,7.199,12.013l18.115,16.439l18.426-16.438c3.631-3.291,6.121-7.445,7.199-12.014
+                	C52.216,18.553,51.97,16.611,51.911,16.242z' fill='#B9BEC4'/>
+                </svg>")
+            PaddingBottom: =43
+            PaddingLeft: =43
+            PaddingRight: =43
+            PaddingTop: =43
+            PressedFill: =RGBA(0,0,0,0)
+            Visible: =!playSong.Liked
+            X: =50
+            Y: =1042
+            ZIndex: =68
+
+        grpSettings As group:
+            Height: =5
+            Width: =5
+            X: =40
+            Y: =40
+            ZIndex: =68
+
+            ShareToggleBG As htmlViewer:
+                Height: =100
+                HtmlText: |-
+                    =If(varToggleSetting1=Blank(),"<div style='
+                      margin: 0;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:90px;
+                    height:40px; 
+                    border-radius: 40px;
+                    background: #40474f;
+                    box-shadow: inset 6px 6px 12px #23272b,
+                                inset -6px -6px 12px #5d6773;'>
+                    </div>","<div style='
+                      margin: 0;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:90px;
+                    height:40px; 
+                    border-radius: 40px;
+                    background: rgb(55,226,213);
+                    background: linear-gradient(135deg, rgba(55,226,213,1) 0%, rgba(26,98,93,1) 100%);'>
+                    </div>")
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =100
+                X: =548
+                Y: =270
+                ZIndex: =15
+
+            ShareToggleSwitch As htmlViewer:
+                Height: =100
+                HtmlText: |-
+                    ="<div style='
+                      margin: 30;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:45px;
+                    height:45px; 
+                    border-radius: 40px;
+                    background: linear-gradient(145deg, #3a4047, #444c55);
+                    box-shadow:  6px 6px 12px #23272b,
+                                 -1px -1px 3px #5d6773
+                    '>
+                    </div>"
+                OnSelect: =If(Self.X=525,Set(varToggleSetting1,1),Set(varToggleSetting1,Blank()))
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =100
+                X: =If(varToggleSetting1=1,575,525)
+                Y: =270
+                ZIndex: =16
+
+            ExplicitToggleBG As htmlViewer:
+                Height: =100
+                HtmlText: |-
+                    =If(varToggleSetting2=Blank(),"<div style='
+                      margin: 0;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:90px;
+                    height:40px; 
+                    border-radius: 40px;
+                    background: #40474f;
+                    box-shadow: inset 6px 6px 12px #23272b,
+                                inset -6px -6px 12px #5d6773;'>
+                    </div>","<div style='
+                      margin: 0;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:90px;
+                    height:40px; 
+                    border-radius: 40px;
+                    background: rgb(55,226,213);
+                    background: linear-gradient(135deg, rgba(55,226,213,1) 0%, rgba(26,98,93,1) 100%);'>
+                    </div>")
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =100
+                X: =548
+                Y: =370
+                ZIndex: =17
+
+            ExplicitToggleSwitch As htmlViewer:
+                Height: =100
+                HtmlText: |-
+                    ="<div style='
+                      margin: 30;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:45px;
+                    height:45px; 
+                    border-radius: 40px;
+                    background: linear-gradient(145deg, #3a4047, #444c55);
+                    box-shadow:  6px 6px 12px #23272b,
+                                 -1px -1px 3px #5d6773
+                    '>
+                    </div>"
+                OnSelect: =If(Self.X=525,Set(varToggleSetting2,1),Set(varToggleSetting2,Blank()))
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =100
+                X: =If(varToggleSetting2=1,575,525)
+                Y: =370
+                ZIndex: =18
+
+            HighQualityToggleBG As htmlViewer:
+                Height: =100
+                HtmlText: |-
+                    =If(varToggleSetting3=Blank(),"<div style='
+                      margin: 0;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:90px;
+                    height:40px; 
+                    border-radius: 40px;
+                    background: #40474f;
+                    box-shadow: inset 6px 6px 12px #23272b,
+                                inset -6px -6px 12px #5d6773;'>
+                    </div>","<div style='
+                      margin: 0;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:90px;
+                    height:40px; 
+                    border-radius: 40px;
+                    background: rgb(55,226,213);
+                    background: linear-gradient(135deg, rgba(55,226,213,1) 0%, rgba(26,98,93,1) 100%);'>
+                    </div>")
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =100
+                X: =548
+                Y: =470
+                ZIndex: =19
+
+            HighQualityToggleSwitch As htmlViewer:
+                Height: =100
+                HtmlText: |-
+                    ="<div style='
+                      margin: 30;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:45px;
+                    height:45px; 
+                    border-radius: 40px;
+                    background: linear-gradient(145deg, #3a4047, #444c55);
+                    box-shadow:  6px 6px 12px #23272b,
+                                 -1px -1px 3px #5d6773
+                    '>
+                    </div>"
+                OnSelect: =If(Self.X=525,Set(varToggleSetting3,1),Set(varToggleSetting3,Blank()))
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =100
+                X: =If(varToggleSetting3=1,575,525)
+                Y: =470
+                ZIndex: =20
+
+            CrossfadeToggleBG As htmlViewer:
+                Height: =100
+                HtmlText: |-
+                    =If(varToggleSetting4=Blank(),"<div style='
+                      margin: 0;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:90px;
+                    height:40px; 
+                    border-radius: 40px;
+                    background: #40474f;
+                    box-shadow: inset 6px 6px 12px #23272b,
+                                inset -6px -6px 12px #5d6773;'>
+                    </div>","<div style='
+                      margin: 0;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:90px;
+                    height:40px; 
+                    border-radius: 40px;
+                    background: rgb(55,226,213);
+                    background: linear-gradient(135deg, rgba(55,226,213,1) 0%, rgba(26,98,93,1) 100%);'>
+                    </div>")
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =100
+                X: =548
+                Y: =570
+                ZIndex: =21
+
+            CrossfadeToggleSwitch As htmlViewer:
+                Height: =100
+                HtmlText: |-
+                    ="<div style='
+                      margin: 30;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:45px;
+                    height:45px; 
+                    border-radius: 40px;
+                    background: linear-gradient(145deg, #3a4047, #444c55);
+                    box-shadow:  6px 6px 12px #23272b,
+                                 -1px -1px 3px #5d6773
+                    '>
+                    </div>"
+                OnSelect: =If(Self.X=525,Set(varToggleSetting4,1),Set(varToggleSetting4,Blank()))
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =100
+                X: =If(varToggleSetting4=1,575,525)
+                Y: =570
+                ZIndex: =22
+
+            AutoPlayToggleBG As htmlViewer:
+                Height: =100
+                HtmlText: |-
+                    =If(varToggleSetting5=Blank(),"<div style='
+                      margin: 0;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:90px;
+                    height:40px; 
+                    border-radius: 40px;
+                    background: #40474f;
+                    box-shadow: inset 6px 6px 12px #23272b,
+                                inset -6px -6px 12px #5d6773;'>
+                    </div>","<div style='
+                      margin: 0;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:90px;
+                    height:40px; 
+                    border-radius: 40px;
+                    background: rgb(55,226,213);
+                    background: linear-gradient(135deg, rgba(55,226,213,1) 0%, rgba(26,98,93,1) 100%);'>
+                    </div>")
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =100
+                X: =548
+                Y: =670
+                ZIndex: =23
+
+            AutoPlayToggleSwitch As htmlViewer:
+                Height: =100
+                HtmlText: |-
+                    ="<div style='
+                      margin: 30;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:45px;
+                    height:45px; 
+                    border-radius: 40px;
+                    background: linear-gradient(145deg, #3a4047, #444c55);
+                    box-shadow:  6px 6px 12px #23272b,
+                                 -1px -1px 3px #5d6773
+                    '>
+                    </div>"
+                OnSelect: =If(Self.X=525,Set(varToggleSetting5,1),Set(varToggleSetting5,Blank()))
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =100
+                X: =If(varToggleSetting5=1,575,525)
+                Y: =670
+                ZIndex: =24
+
+            ShareSettingTitle As label:
+                AutoHeight: =true
+                Color: =RGBA(255, 255, 255, 1)
+                Font: ="Agency FB"
+                FontWeight: =FontWeight.Semibold
+                Height: =60
+                Size: =16
+                Text: ="Share listening activity"
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =350
+                X: =180
+                Y: =290
+                ZIndex: =25
+
+            ExplicitSettingTitle As label:
+                AutoHeight: =true
+                Color: =RGBA(255, 255, 255, 1)
+                Font: ="Agency FB"
+                FontWeight: =FontWeight.Semibold
+                Height: =60
+                Size: =16
+                Text: ="Allow explicit content"
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =350
+                X: =180
+                Y: =390
+                ZIndex: =26
+
+            HighQualitySettingTitle As label:
+                AutoHeight: =true
+                Color: =RGBA(255, 255, 255, 1)
+                Font: ="Agency FB"
+                FontWeight: =FontWeight.Semibold
+                Height: =60
+                Size: =16
+                Text: ="Stream in high quality"
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =350
+                X: =180
+                Y: =490
+                ZIndex: =27
+
+            "'CrossfadeSetting Title' As label":
+                AutoHeight: =true
+                Color: =RGBA(255, 255, 255, 1)
+                Font: ="Agency FB"
+                FontWeight: =FontWeight.Semibold
+                Height: =60
+                Size: =16
+                Text: ="Crossfade"
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =350
+                X: =180
+                Y: =590
+                ZIndex: =28
+
+            AutoPlaySettingTitle As label:
+                AutoHeight: =true
+                Color: =RGBA(255, 255, 255, 1)
+                Font: ="Agency FB"
+                FontWeight: =FontWeight.Semibold
+                Height: =60
+                Size: =16
+                Text: ="Auto-play on this device"
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =350
+                X: =180
+                Y: =690
+                ZIndex: =29
+
+            ShareSettingDetail As label:
+                AutoHeight: =true
+                Color: =RGBA(255, 255, 255, 1)
+                Font: ="Agency FB"
+                Height: =60
+                Text: ="Friends will be able to see all listening activity"
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =350
+                X: =180
+                Y: =320
+                ZIndex: =30
+
+            ExplicitSettingDetail As label:
+                AutoHeight: =true
+                Color: =RGBA(255, 255, 255, 1)
+                Font: ="Agency FB"
+                Height: =60
+                Text: ="Songs marked 'E' will be visible and playable"
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =350
+                X: =180
+                Y: =420
+                ZIndex: =31
+
+            HighQualitySettingDetail As label:
+                AutoHeight: =true
+                Color: =RGBA(255, 255, 255, 1)
+                Font: ="Agency FB"
+                Height: =60
+                Text: ="Uses more data and storage space"
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =350
+                X: =180
+                Y: =520
+                ZIndex: =32
+
+            CrossfadeSettingDetail As label:
+                AutoHeight: =true
+                Color: =RGBA(255, 255, 255, 1)
+                Font: ="Agency FB"
+                Height: =60
+                Text: ="Enables crossfade of 3 seconds"
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =350
+                X: =180
+                Y: =620
+                ZIndex: =33
+
+            AutoPlaySettingDetail As label:
+                AutoHeight: =true
+                Color: =RGBA(255, 255, 255, 1)
+                Font: ="Agency FB"
+                Height: =60
+                Text: ="Auto-play similar songs when your music ends"
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =350
+                X: =180
+                Y: =720
+                ZIndex: =34
+
+            Level1Line As htmlViewer:
+                Height: =150
+                HtmlText: |-
+                    ="<div style='
+                      margin: 0;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:20px;
+                    height:90%; 
+                    border-radius: 40px;
+                    background: #40474f;
+                    box-shadow: inset 2px 2px 3px #23272b,
+                                inset -2px -2px 3px #5d6773;'>
+                    </div>"
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =50
+                X: =220
+                Y: =800
+                ZIndex: =35
+
+            Level2Line As htmlViewer:
+                Height: =150
+                HtmlText: |-
+                    ="<div style='
+                      margin: 0;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:20px;
+                    height:90%; 
+                    border-radius: 40px;
+                    background: #40474f;
+                    box-shadow: inset 2px 2px 3px #23272b,
+                                inset -2px -2px 3px #5d6773;'>
+                    </div>"
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =50
+                X: =300
+                Y: =800
+                ZIndex: =36
+
+            Level3Line As htmlViewer:
+                Height: =150
+                HtmlText: |-
+                    ="<div style='
+                      margin: 0;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:20px;
+                    height:90%; 
+                    border-radius: 40px;
+                    background: #40474f;
+                    box-shadow: inset 2px 2px 3px #23272b,
+                                inset -2px -2px 3px #5d6773;'>
+                    </div>"
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =50
+                X: =380
+                Y: =800
+                ZIndex: =37
+
+            Level4Line As htmlViewer:
+                Height: =150
+                HtmlText: |-
+                    ="<div style='
+                      margin: 0;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:20px;
+                    height:90%; 
+                    border-radius: 40px;
+                    background: #40474f;
+                    box-shadow: inset 2px 2px 3px #23272b,
+                                inset -2px -2px 3px #5d6773;'>
+                    </div>"
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =50
+                X: =460
+                Y: =800
+                ZIndex: =38
+
+            Level5Line As htmlViewer:
+                Height: =150
+                HtmlText: |-
+                    ="<div style='
+                      margin: 0;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:20px;
+                    height:90%; 
+                    border-radius: 40px;
+                    background: #40474f;
+                    box-shadow: inset 2px 2px 3px #23272b,
+                                inset -2px -2px 3px #5d6773;'>
+                    </div>"
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =50
+                X: =540
+                Y: =800
+                ZIndex: =39
+
+            Level1Level As htmlViewer:
+                Height: =30*varLevel1
+                HtmlText: |-
+                    ="<div style='
+                      margin: 0;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:20px;
+                    height:90%; 
+                    border-radius: 40px;
+                    background: rgb(55,226,213);
+                    background: linear-gradient(135deg, rgba(55,226,213,1) 0%, rgba(26,98,93,1) 100%);
+                    
+                    '>
+                    </div>"
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =50
+                X: =220
+                Y: =950-Self.Height
+                ZIndex: =40
+
+            Level2Level As htmlViewer:
+                Height: =30*varLevel2
+                HtmlText: |-
+                    ="<div style='
+                      margin: 0;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:20px;
+                    height:90%; 
+                    border-radius: 40px;
+                    background: rgb(55,226,213);
+                    background: linear-gradient(135deg, rgba(55,226,213,1) 0%, rgba(26,98,93,1) 100%);
+                    
+                    '>
+                    </div>"
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =50
+                X: =300
+                Y: =950-Self.Height
+                ZIndex: =41
+
+            Level3Level As htmlViewer:
+                Height: =30*varLevel3
+                HtmlText: |-
+                    ="<div style='
+                      margin: 0;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:20px;
+                    height:90%; 
+                    border-radius: 40px;
+                    background: rgb(55,226,213);
+                    background: linear-gradient(135deg, rgba(55,226,213,1) 0%, rgba(26,98,93,1) 100%);
+                    
+                    '>
+                    </div>"
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =50
+                X: =380
+                Y: =950-Self.Height
+                ZIndex: =42
+
+            Level4Level As htmlViewer:
+                Height: =30*varLevel4
+                HtmlText: |-
+                    ="<div style='
+                      margin: 0;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:20px;
+                    height:90%; 
+                    border-radius: 40px;
+                    background: rgb(55,226,213);
+                    background: linear-gradient(135deg, rgba(55,226,213,1) 0%, rgba(26,98,93,1) 100%);
+                    
+                    '>
+                    </div>"
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =50
+                X: =460
+                Y: =950-Self.Height
+                ZIndex: =43
+
+            Level5Level As htmlViewer:
+                Height: =30*varLevel5
+                HtmlText: |-
+                    ="<div style='
+                      margin: 0;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:20px;
+                    height:90%; 
+                    border-radius: 40px;
+                    background: rgb(55,226,213);
+                    background: linear-gradient(135deg, rgba(55,226,213,1) 0%, rgba(26,98,93,1) 100%);
+                    
+                    '>
+                    </div>"
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =50
+                X: =540
+                Y: =950-Self.Height
+                ZIndex: =44
+
+            "'120hzHigherLevel' As icon.Add":
+                BorderStyle: =BorderStyle.None
+                Color: =RGBA(255, 255, 255, 1)
+                Height: =30
+                HoverColor: =ColorFade(Self.Color, -20%)
+                Icon: =Icon.ChevronUp
+                OnSelect: |-
+                    =If(
+                        Level1Level.Height = 30,
+                        Set(varLevel1,2),
+                        If(
+                            Level1Level.Height = 60,
+                            Set(varLevel1,3),
+                            If(
+                                Level1Level.Height = 90,
+                                Set(varLevel1,4),
+                                Set(varLevel1,5)
+                            )
+                        )
+                    )
+                PaddingBottom: =10
+                PaddingLeft: =10
+                PaddingRight: =10
+                PaddingTop: =10
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =40
+                X: =225
+                Y: =770
+                ZIndex: =45
+
+            "'500hzHigherLevel' As icon.Add":
+                BorderStyle: =BorderStyle.None
+                Color: =RGBA(255, 255, 255, 1)
+                Height: =30
+                HoverColor: =ColorFade(Self.Color, -20%)
+                Icon: =Icon.ChevronUp
+                OnSelect: |-
+                    =If(
+                        Level2Level.Height = 30,
+                        Set(varLevel2,2),
+                        If(
+                            Level2Level.Height = 60,
+                            Set(varLevel2,3),
+                            If(
+                                Level2Level.Height = 90,
+                                Set(varLevel2,4),
+                                Set(varLevel2,5)
+                            )
+                        )
+                    )
+                PaddingBottom: =10
+                PaddingLeft: =10
+                PaddingRight: =10
+                PaddingTop: =10
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =40
+                X: =305
+                Y: =770
+                ZIndex: =46
+
+            "'1khzHigherLevel' As icon.Add":
+                BorderStyle: =BorderStyle.None
+                Color: =RGBA(255, 255, 255, 1)
+                Height: =30
+                HoverColor: =ColorFade(Self.Color, -20%)
+                Icon: =Icon.ChevronUp
+                OnSelect: |-
+                    =If(
+                        Level3Level.Height = 30,
+                        Set(varLevel3,2),
+                        If(
+                            Level3Level.Height = 60,
+                            Set(varLevel3,3),
+                            If(
+                                Level3Level.Height = 90,
+                                Set(varLevel3,4),
+                                Set(varLevel3,5)
+                            )
+                        )
+                    )
+                PaddingBottom: =10
+                PaddingLeft: =10
+                PaddingRight: =10
+                PaddingTop: =10
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =40
+                X: =385
+                Y: =770
+                ZIndex: =47
+
+            "'4khzHigherLevel' As icon.Add":
+                BorderStyle: =BorderStyle.None
+                Color: =RGBA(255, 255, 255, 1)
+                Height: =30
+                HoverColor: =ColorFade(Self.Color, -20%)
+                Icon: =Icon.ChevronUp
+                OnSelect: |-
+                    =If(
+                        Level4Level.Height = 30,
+                        Set(varLevel4,2),
+                        If(
+                            Level4Level.Height = 60,
+                            Set(varLevel4,3),
+                            If(
+                                Level4Level.Height = 90,
+                                Set(varLevel4,4),
+                                Set(varLevel4,5)
+                            )
+                        )
+                    )
+                PaddingBottom: =10
+                PaddingLeft: =10
+                PaddingRight: =10
+                PaddingTop: =10
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =40
+                X: =465
+                Y: =770
+                ZIndex: =48
+
+            "'8khzHigherLevel' As icon.Add":
+                BorderStyle: =BorderStyle.None
+                Color: =RGBA(255, 255, 255, 1)
+                Height: =30
+                HoverColor: =ColorFade(Self.Color, -20%)
+                Icon: =Icon.ChevronUp
+                OnSelect: |-
+                    =If(
+                        Level5Level.Height = 30,
+                        Set(varLevel5,2),
+                        If(
+                            Level5Level.Height = 60,
+                            Set(varLevel5,3),
+                            If(
+                                Level5Level.Height = 90,
+                                Set(varLevel5,4),
+                                Set(varLevel5,5)
+                            )
+                        )
+                    )
+                PaddingBottom: =10
+                PaddingLeft: =10
+                PaddingRight: =10
+                PaddingTop: =10
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =40
+                X: =545
+                Y: =770
+                ZIndex: =49
+
+            "'120hzLowerLevel' As icon.Add":
+                BorderStyle: =BorderStyle.None
+                Color: =RGBA(255, 255, 255, 1)
+                Height: =30
+                HoverColor: =ColorFade(Self.Color, -20%)
+                Icon: =Icon.ChevronDown
+                OnSelect: |-
+                    =If(
+                        Level1Level.Height = 150,
+                        Set(varLevel1,4),
+                        If(
+                            Level1Level.Height = 120,
+                            Set(varLevel1,3),
+                            If(
+                                Level1Level.Height = 90,
+                                Set(varLevel1,2),
+                                Set(varLevel1,1)
+                            )
+                        )
+                    )
+                PaddingBottom: =10
+                PaddingLeft: =10
+                PaddingRight: =10
+                PaddingTop: =10
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =40
+                X: =225
+                Y: =950
+                ZIndex: =50
+
+            "'500hzLowerLevel' As icon.Add":
+                BorderStyle: =BorderStyle.None
+                Color: =RGBA(255, 255, 255, 1)
+                Height: =30
+                HoverColor: =ColorFade(Self.Color, -20%)
+                Icon: =Icon.ChevronDown
+                OnSelect: |-
+                    =If(
+                        Level2Level.Height = 150,
+                        Set(varLevel2,4),
+                        If(
+                            Level2Level.Height = 120,
+                            Set(varLevel2,3),
+                            If(
+                                Level2Level.Height = 90,
+                                Set(varLevel2,2),
+                                Set(varLevel2,1)
+                            )
+                        )
+                    )
+                PaddingBottom: =10
+                PaddingLeft: =10
+                PaddingRight: =10
+                PaddingTop: =10
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =40
+                X: =305
+                Y: =950
+                ZIndex: =51
+
+            "'1khzLowerLevel' As icon.Add":
+                BorderStyle: =BorderStyle.None
+                Color: =RGBA(255, 255, 255, 1)
+                Height: =30
+                HoverColor: =ColorFade(Self.Color, -20%)
+                Icon: =Icon.ChevronDown
+                OnSelect: |-
+                    =If(
+                        Level3Level.Height = 150,
+                        Set(varLevel3,4),
+                        If(
+                            Level3Level.Height = 120,
+                            Set(varLevel3,3),
+                            If(
+                                Level3Level.Height = 90,
+                                Set(varLevel3,2),
+                                Set(varLevel3,1)
+                            )
+                        )
+                    )
+                PaddingBottom: =10
+                PaddingLeft: =10
+                PaddingRight: =10
+                PaddingTop: =10
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =40
+                X: =385
+                Y: =950
+                ZIndex: =52
+
+            "'4khzLowerLevel' As icon.Add":
+                BorderStyle: =BorderStyle.None
+                Color: =RGBA(255, 255, 255, 1)
+                Height: =30
+                HoverColor: =ColorFade(Self.Color, -20%)
+                Icon: =Icon.ChevronDown
+                OnSelect: |-
+                    =If(
+                        Level4Level.Height = 150,
+                        Set(varLevel4,4),
+                        If(
+                            Level4Level.Height = 120,
+                            Set(varLevel4,3),
+                            If(
+                                Level4Level.Height = 90,
+                                Set(varLevel4,2),
+                                Set(varLevel4,1)
+                            )
+                        )
+                    )
+                PaddingBottom: =10
+                PaddingLeft: =10
+                PaddingRight: =10
+                PaddingTop: =10
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =40
+                X: =465
+                Y: =950
+                ZIndex: =53
+
+            "'8khzLowerLevel' As icon.Add":
+                BorderStyle: =BorderStyle.None
+                Color: =RGBA(255, 255, 255, 1)
+                Height: =30
+                HoverColor: =ColorFade(Self.Color, -20%)
+                Icon: =Icon.ChevronDown
+                OnSelect: |-
+                    =If(
+                        Level5Level.Height = 150,
+                        Set(varLevel5,4),
+                        If(
+                            Level5Level.Height = 120,
+                            Set(varLevel5,3),
+                            If(
+                                Level5Level.Height = 90,
+                                Set(varLevel5,2),
+                                Set(varLevel5,1)
+                            )
+                        )
+                    )
+                PaddingBottom: =10
+                PaddingLeft: =10
+                PaddingRight: =10
+                PaddingTop: =10
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =40
+                X: =545
+                Y: =950
+                ZIndex: =54
+
+            "'120hzLabel' As label":
+                Align: =Align.Center
+                AutoHeight: =true
+                Color: =RGBA(255, 255, 255, 1)
+                Height: =199
+                Size: =6
+                Text: ="120hz"
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =50
+                X: =220
+                Y: =977
+                ZIndex: =55
+
+            "'500hzLabel' As label":
+                Align: =Align.Center
+                AutoHeight: =true
+                Color: =RGBA(255, 255, 255, 1)
+                Height: =199
+                Size: =6
+                Text: ="500hz"
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =50
+                X: =300
+                Y: =977
+                ZIndex: =56
+
+            "'1khzLabel' As label":
+                Align: =Align.Center
+                AutoHeight: =true
+                Color: =RGBA(255, 255, 255, 1)
+                Height: =199
+                Size: =6
+                Text: ="1khz"
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =50
+                X: =380
+                Y: =977
+                ZIndex: =57
+
+            "'4khzLabel' As label":
+                Align: =Align.Center
+                AutoHeight: =true
+                Color: =RGBA(255, 255, 255, 1)
+                Height: =199
+                Size: =6
+                Text: ="4khz"
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =50
+                X: =460
+                Y: =977
+                ZIndex: =58
+
+            "'8khzLabel' As label":
+                Align: =Align.Center
+                AutoHeight: =true
+                Color: =RGBA(255, 255, 255, 1)
+                Height: =199
+                Size: =6
+                Text: ="8khz"
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =50
+                X: =540
+                Y: =977
+                ZIndex: =59
+
+            LowerDeciLabel As label:
+                Align: =Align.Center
+                AutoHeight: =true
+                Color: =RGBA(255, 255, 255, 1)
+                Height: =199
+                Size: =6
+                Text: ="-10db"
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =40
+                X: =175
+                Y: =922
+                ZIndex: =60
+
+            UpperDeciLabel As label:
+                Align: =Align.Center
+                AutoHeight: =true
+                Color: =RGBA(255, 255, 255, 1)
+                Height: =199
+                Size: =6
+                Text: ="+10db"
+                Visible: =ButtonGallery.Selected.Name="Settings"
+                Width: =40
+                X: =595
+                Y: =810
+                ZIndex: =61
+
+        grpHome As group:
+            Height: =5
+            Width: =5
+            X: =40
+            Y: =40
+            ZIndex: =72
+
+            DiscoverGallery As gallery.galleryHorizontal:
+                Height: =265
+                Items: |-
+                    =Table({Name:"Hot right now",Hook:"World Top 100",Colour:""},{Name:"Pride 2022",Hook:"Shamelessly Sassy Pop",Color:""},{Name:"Top Near You",Hook:"Birmingham's Listening To...",Colour:""})
+                ShowScrollbar: =false
+                TemplatePadding: =0
+                TemplateSize: =If(Self.Layout = Layout.Horizontal, Min(320, Self.Width - 60), Min(320, Self.Height - 60))
+                Visible: =ButtonGallery.Selected.Name="Home"
+                Width: =575
+                X: =143
+                Y: =220
+                ZIndex: =12
+
+                DiscoverGalleryShadow As htmlViewer:
+                    Height: =Parent.TemplateHeight
+                    HtmlText: |-
+                        ="<div style='
+                        margin:20px;
+                        position: absolute;
+                        width:260px;
+                        height:190px; 
+                        border-radius: 18px;
+                        background: rgb(55,226,213);
+                        background: linear-gradient(135deg, rgba(55,226,213,1) 0%, rgba(26,98,93,1) 100%);
+                        box-shadow:  10px 10px 15px #23272b;'>
+                        </div>"
+                    OnSelect: =Select(Parent)
+                    Width: =Parent.TemplateWidth
+                    ZIndex: =1
+
+                DiscoverGalleryScrim As image:
+                    Height: =190
+                    Image: |-
+                        ="data:image/svg+xml;utf8, "&EncodeUrl("<svg width='100%' height='100%' id='svg' viewBox='0 0 1440 500' xmlns='http://www.w3.org/2000/svg' class='transition duration-300 ease-in-out delay-150'><defs><linearGradient id='gradient' x1='54%' y1='0%' x2='46%' y2='100%'><stop offset='5%' stop-color='#002bdc88'></stop><stop offset='95%' stop-color='#32ded488'></stop></linearGradient></defs><path d='M 0,500 C 0,500 0,166 0,166 C 38.875109043326546,151.87495043485157 77.75021808665309,137.74990086970314 134,140 C 190.2497819133469,142.25009913029686 263.87423669671415,160.87534695603898 309,161 C 354.12576330328585,161.12465304396102 370.75283512649025,142.74871130614082 416,143 C 461.24716487350975,143.25128869385918 535.1144227973249,162.12980781939783 584,170 C 632.8855772026751,177.87019218060217 656.7894736842105,174.73205741626796 697,185 C 737.2105263157895,195.26794258373204 793.727682465833,218.9419625155304 851,213 C 908.272317534167,207.0580374844696 966.2997964524573,171.5000925216104 1021,146 C 1075.7002035475427,120.49990747838959 1127.0731317243383,105.05766739802796 1174,110 C 1220.9268682756617,114.94233260197204 1263.407676650189,140.26923788627772 1307,153 C 1350.592323349811,165.73076211372228 1395.2961616749055,165.86538105686114 1440,166 C 1440,166 1440,500 1440,500 Z' stroke='none' stroke-width='0' fill='url(#gradient)' class='transition-all duration-300 ease-in-out delay-150 path-0'></path><defs><linearGradient id='gradient' x1='54%' y1='0%' x2='46%' y2='100%'><stop offset='5%' stop-color='#002bdcff'></stop><stop offset='95%' stop-color='#32ded4ff'></stop></linearGradient></defs><path d='M 0,500 C 0,500 0,333 0,333 C 41.87591530307438,295.99722435168786 83.75183060614876,258.9944487033757 135,278 C 186.24816939385124,297.0055512966243 246.86859287847943,372.01942953818497 300,390 C 353.13140712152057,407.98057046181503 398.77379787993345,368.9278331438843 444,351 C 489.22620212006655,333.0721668561157 534.0362156017869,336.2692378862777 576,340 C 617.9637843982131,343.7307621137223 657.0813397129186,347.9952153110048 699,336 C 740.9186602870814,324.0047846889952 785.6384255465384,295.74990086970314 837,308 C 888.3615744534616,320.25009913029686 946.3649581009279,373.0051812101826 996,387 C 1045.6350418990721,400.9948187898174 1086.9017420497503,376.2293742895662 1135,356 C 1183.0982579502497,335.7706257104338 1238.0280737000714,320.07732163155254 1290,317 C 1341.9719262999286,313.92267836844746 1390.9859631499644,323.46133918422373 1440,333 C 1440,333 1440,500 1440,500 Z' stroke='none' stroke-width='0' fill='url(#gradient)' class='transition-all duration-300 ease-in-out delay-150 path-1'></path></svg>")
+                    ImagePosition: =ImagePosition.Fill
+                    OnSelect: =Select(Parent)
+                    RadiusBottomLeft: =18
+                    RadiusBottomRight: =18
+                    Width: =260
+                    X: =25
+                    Y: =25
+                    ZIndex: =3
+
+                DiscoverGalleryName As htmlViewer:
+                    Font: ="Agency FB"
+                    HtmlText: |-
+                        ="<div style='position:relative;
+                                padding-left:10px;
+                                color: #FFFFFF;
+                                font-size: 16px;
+                                text-shadow: 2px 2px 2px #000;'>" & ThisItem.Name & "</div>"
+                    Width: =260
+                    X: =24
+                    Y: =30
+                    ZIndex: =4
+
+                DiscoverGalleryHook As htmlViewer:
+                    Font: ="Agency FB"
+                    HtmlText: |-
+                        ="<div style='position:relative;
+                                border-radius:20px;
+                                padding-left:10px;
+                                color: #FFFFFF;
+                                font-size: 22px;
+                                text-shadow: 2px 2px 2px #000;'>" & ThisItem.Hook & "</div>"
+                    Width: =260
+                    X: =24
+                    Y: =175
+                    ZIndex: =5
+
+            SuggestGallery As gallery.galleryHorizontal:
+                Height: =265
+                Items: |-
+                    =Table({Name:"Jump back in...",Hook:"Wu-Tang vs Shaolin",Colour:""},{Name:"More of what you love...",Hook:"Electronic 80s",Color:""},{Name:"It's been a while...",Hook:"All About That Bass",Colour:""})
+                ShowScrollbar: =false
+                TemplatePadding: =0
+                TemplateSize: =If(Self.Layout = Layout.Horizontal, Min(320, Self.Width - 60), Min(320, Self.Height - 60))
+                Visible: =ButtonGallery.Selected.Name="Home"
+                Width: =575
+                X: =143
+                Y: =487
+                ZIndex: =13
+
+                SuggestGalleryShadow As htmlViewer:
+                    Height: =Parent.TemplateHeight
+                    HtmlText: |-
+                        ="<div style='
+                        margin:20px;
+                        position: absolute;
+                        width:260px;
+                        height:190px; 
+                        border-radius: 18px;
+                        background: #EB144C;
+                        background: linear-gradient(135deg, #FCB900 0%, #FF6900 100%);
+                        box-shadow: 10px 10px 15px 0px #23272b;'>
+                        </div>"
+                    OnSelect: =Select(Parent)
+                    Width: =Parent.TemplateWidth
+                    ZIndex: =1
+
+                SuggestGalleryScrim As image:
+                    Height: =190
+                    Image: |-
+                        ="data:image/svg+xml;utf8, "&EncodeUrl("<svg width='100%' height='100%' id='svg' viewBox='0 0 1440 500' xmlns='http://www.w3.org/2000/svg' class='transition duration-300 ease-in-out delay-150'><defs><linearGradient id='gradient' x1='54%' y1='0%' x2='46%' y2='100%'><stop offset='5%' stop-color='#eb144c88'></stop><stop offset='95%' stop-color='#ff690088'></stop></linearGradient></defs><path d='M 0,500 C 0,500 0,166 0,166 C 51.371857569589466,162.64671283935604 102.74371513917893,159.29342567871208 145,162 C 187.25628486082107,164.70657432128792 220.39699701287373,173.47301012450765 271,166 C 321.6030029871263,158.52698987549235 389.66829680932614,134.81453382325728 439,118 C 488.33170319067386,101.18546617674272 518.9298157498216,91.2688545824632 563,113 C 607.0701842501784,134.7311454175368 664.6124401913876,188.11004784688993 717,205 C 769.3875598086124,221.88995215311007 816.6204234846283,202.29095402997703 866,177 C 915.3795765153717,151.70904597002297 966.9058658700999,120.72613603320204 1013,140 C 1059.0941341299,159.27386396679796 1099.756113034973,228.80450183721484 1146,224 C 1192.243886965027,219.19549816278516 1244.069681990008,140.05585661793862 1294,118 C 1343.930318009992,95.94414338206138 1391.9651590049962,130.9720716910307 1440,166 C 1440,166 1440,500 1440,500 Z' stroke='none' stroke-width='0' fill='url(#gradient)' class='transition-all duration-300 ease-in-out delay-150 path-0'></path><defs><linearGradient id='gradient' x1='54%' y1='0%' x2='46%' y2='100%'><stop offset='5%' stop-color='#eb144cff'></stop><stop offset='95%' stop-color='#ff6900ff'></stop></linearGradient></defs><path d='M 0,500 C 0,500 0,333 0,333 C 58.90613021755796,343.249927304449 117.81226043511592,353.4998546088979 162,338 C 206.18773956488408,322.5001453911021 235.6570884770943,281.2505088688572 278,294 C 320.3429115229057,306.7494911311428 375.5593856565069,373.4981099156732 419,394 C 462.4406143434931,414.5018900843268 494.1053688968781,388.7570514684501 549,373 C 603.8946311031219,357.2429485315499 682.0191387559809,351.47368421052636 740,359 C 797.9808612440191,366.52631578947364 835.8180760791985,387.3482116894446 874,365 C 912.1819239208015,342.6517883105554 950.7085569272251,277.1334690316953 997,287 C 1043.2914430727749,296.8665309683047 1097.3476962119007,382.1179121837743 1152,386 C 1206.6523037880993,389.8820878162257 1261.9006582251711,312.39488223320734 1310,290 C 1358.0993417748289,267.60511776679266 1399.0496708874143,300.30255888339633 1440,333 C 1440,333 1440,500 1440,500 Z' stroke='none' stroke-width='0' fill='url(#gradient)' class='transition-all duration-300 ease-in-out delay-150 path-1'></path></svg>")
+                    ImagePosition: =ImagePosition.Fill
+                    OnSelect: =Select(Parent)
+                    RadiusBottomLeft: =18
+                    RadiusBottomRight: =18
+                    Width: =260
+                    X: =25
+                    Y: =25
+                    ZIndex: =3
+
+                SuggestGalleryName As htmlViewer:
+                    Font: ="Agency FB"
+                    HtmlText: |-
+                        ="<div style='position:relative;
+                                padding-left:10px;
+                                color: #FFFFFF;
+                                font-size: 16px;
+                                text-shadow: 2px 2px 2px #000;'>" & ThisItem.Name & "</div>"
+                    Width: =260
+                    X: =24
+                    Y: =30
+                    ZIndex: =4
+
+                SuggestGalleryHook As htmlViewer:
+                    Font: ="Agency FB"
+                    HtmlText: |-
+                        ="<div style='position:relative;
+                                border-radius:20px;
+                                padding-left:10px;
+                                color: #FFFFFF;
+                                font-size: 22px;
+                                text-shadow: 2px 2px 2px #000;'>" & ThisItem.Hook & "</div>"
+                    Width: =260
+                    X: =24
+                    Y: =175
+                    ZIndex: =5
+
+            MoodGallery As gallery.galleryHorizontal:
+                Height: =265
+                Items: |-
+                    =Table({Name:"Daily Mood 01",Hook:"Your promotion was bittersweet",Colour:""},{Name:"Daily Mood 02",Hook:"Music to ugly-cry to",Color:""},{Name:"Daily Mood 03",Hook:"Lifting weights, loudly",Colour:""})
+                ShowScrollbar: =false
+                TemplatePadding: =0
+                TemplateSize: =If(Self.Layout = Layout.Horizontal, Min(320, Self.Width - 60), Min(320, Self.Height - 60))
+                Visible: =ButtonGallery.Selected.Name="Home"
+                Width: =575
+                X: =143
+                Y: =755
+                ZIndex: =14
+
+                MoodGalleryShadow As htmlViewer:
+                    Height: =Parent.TemplateHeight
+                    HtmlText: |-
+                        ="<div style='
+                        margin:20px;
+                        position: absolute;
+                        width:260px;
+                        height:190px; 
+                        border-radius: 18px;
+                        background: #F78DA7;
+                        background: linear-gradient(135deg, #F78DA7 0%, #FF0080 100%);
+                        box-shadow: 10px 10px 15px 0px #23272b;'>
+                        </div>"
+                    OnSelect: =Select(Parent)
+                    Width: =Parent.TemplateWidth
+                    ZIndex: =1
+
+                MoodGalleryScrim As image:
+                    Height: =190
+                    Image: |-
+                        ="data:image/svg+xml;utf8, "&EncodeUrl("<svg width='100%' height='100%' id='svg' viewBox='0 0 1440 500' xmlns='http://www.w3.org/2000/svg' class='transition duration-300 ease-in-out delay-150'><defs><linearGradient id='gradient' x1='54%' y1='0%' x2='46%' y2='100%'><stop offset='5%' stop-color='#9900ef88'></stop><stop offset='95%' stop-color='#f78da788'></stop></linearGradient></defs><path d='M 0,500 C 0,500 0,166 0,166 C 51.36846070475032,150.44498929392796 102.73692140950064,134.8899785878559 148,130 C 193.26307859049936,125.1100214121441 232.42077506674775,130.88507494250442 278,126 C 323.57922493325225,121.11492505749558 375.5799783235083,105.56972164212641 424,127 C 472.4200216764917,148.4302783578736 517.2593116392187,206.8360384889899 568,200 C 618.7406883607813,193.1639615110101 675.3827751196172,121.08612440191389 722,122 C 768.6172248803828,122.91387559808611 805.2095878823126,196.81946390335455 848,202 C 890.7904121176874,207.18053609664545 939.7788733511327,143.63601998466785 993,113 C 1046.2211266488673,82.36398001533215 1103.6749187131563,84.63645615797404 1150,105 C 1196.3250812868437,125.36354384202596 1231.521451796241,163.818155383436 1278,177 C 1324.478548203759,190.181844616564 1382.2392741018793,178.09092230828202 1440,166 C 1440,166 1440,500 1440,500 Z' stroke='none' stroke-width='0' fill='url(#gradient)' class='transition-all duration-300 ease-in-out delay-150 path-0'></path><defs><linearGradient id='gradient' x1='54%' y1='0%' x2='46%' y2='100%'><stop offset='5%' stop-color='#9900efff'></stop><stop offset='95%' stop-color='#f78da7ff'></stop></linearGradient></defs><path d='M 0,500 C 0,500 0,333 0,333 C 50.663353511856,329.7493721747866 101.326707023712,326.4987443495731 147,307 C 192.673292976288,287.5012556504269 233.35652541700807,251.75439477649417 284,273 C 334.6434745829919,294.24560522350583 395.24719130825565,372.4836765444501 440,373 C 484.75280869174435,373.5163234555499 513.6547093499695,296.31089904570564 562,282 C 610.3452906500305,267.68910095429436 678.133971291866,316.27272727272725 730,326 C 781.866028708134,335.72727272727275 817.8094054825663,306.59819186338524 860,294 C 902.1905945174337,281.40180813661476 950.628406777869,285.3345052737318 1006,305 C 1061.371593222131,324.6654947262682 1123.6769674059583,360.0637870416876 1174,379 C 1224.3230325940417,397.9362129583124 1262.6637235982978,400.4103465595178 1305,390 C 1347.3362764017022,379.5896534404822 1393.668138200851,356.2948267202411 1440,333 C 1440,333 1440,500 1440,500 Z' stroke='none' stroke-width='0' fill='url(#gradient)' class='transition-all duration-300 ease-in-out delay-150 path-1'></path></svg>")
+                    ImagePosition: =ImagePosition.Fill
+                    OnSelect: =Select(Parent)
+                    RadiusBottomLeft: =18
+                    RadiusBottomRight: =18
+                    Width: =260
+                    X: =25
+                    Y: =25
+                    ZIndex: =3
+
+                MoodGalleryName As htmlViewer:
+                    Font: ="Agency FB"
+                    HtmlText: |-
+                        ="<div style='position:relative;
+                                padding-left:10px;
+                                color: #FFFFFF;
+                                font-size: 16px;
+                                text-shadow: 2px 2px 2px #000;'>" & ThisItem.Name & "</div>"
+                    Width: =260
+                    X: =24
+                    Y: =30
+                    ZIndex: =4
+
+                MoodGalleryHook As htmlViewer:
+                    Font: ="Agency FB"
+                    HtmlText: |-
+                        ="<div style='position:relative;
+                                border-radius:20px;
+                                padding-left:10px;
+                                color: #FFFFFF;
+                                font-size: 22px;
+                                text-shadow: 2px 2px 2px #000;'>" & ThisItem.Hook & "</div>"
+                    Width: =260
+                    X: =24
+                    Y: =175
+                    ZIndex: =5
+
+        grpFrame As group:
+            Height: =5
+            Width: =5
+            X: =40
+            Y: =40
+            ZIndex: =72
+
+            HomeBG As button:
+                BorderStyle: =BorderStyle.None
+                DisabledFill: =RGBA(64, 71, 79, 1)
+                DisplayMode: =DisplayMode.Disabled
+                Height: =1316
+                RadiusBottomLeft: =55
+                RadiusBottomRight: =55
+                RadiusTopLeft: =55
+                RadiusTopRight: =55
+                Text: =""
+                Width: =718
+                ZIndex: =1
+
+            BGHeader As image:
+                Height: =212
+                Image: |-
+                    ="data:image/svg+xml;utf8, "&EncodeUrl("<svg width='100%' height='100%' id='svg' viewBox='0 0 1440 500' xmlns='http://www.w3.org/2000/svg' class='transition duration-300 ease-in-out delay-150'><style>
+                              .path-0{
+                                animation:pathAnim-0 4s;
+                                animation-timing-function: linear;
+                                animation-iteration-count: infinite;
+                              }
+                              @keyframes pathAnim-0{
+                                0%{
+                                  d: path('M 0,500 C 0,500 0,166 0,166 C 52.193832773797894,139.06152687091912 104.38766554759579,112.12305374183828 157,129 C 209.6123344524042,145.87694625816172 262.6431705834148,206.56931190356605 306,211 C 349.3568294165852,215.43068809643395 383.03965211874487,163.59969864389754 429,163 C 474.96034788125513,162.40030135610246 533.1982209416057,213.03189352084382 579,224 C 624.8017790583943,234.96810647915618 658.1674641148326,206.27272727272725 711,185 C 763.8325358851674,163.72727272727275 836.1319225990643,149.8771973882471 890,156 C 943.8680774009357,162.1228026117529 979.3048454889106,188.21848317428427 1012,187 C 1044.6951545110894,185.78151682571573 1074.6486954452935,157.24886991461577 1125,155 C 1175.3513045547065,152.75113008538423 1246.1003727299162,176.78603716725266 1302,183 C 1357.8996272700838,189.21396283274734 1398.949813635042,177.60698141637369 1440,166 C 1440,166 1440,500 1440,500 Z');
+                                }
+                                25%{
+                                  d: path('M 0,500 C 0,500 0,166 0,166 C 59.11915461682837,156.04348515689023 118.23830923365674,146.08697031378045 168,161 C 217.76169076634326,175.91302968621955 258.16591768220144,215.69560390176846 298,226 C 337.83408231779856,236.30439609823154 377.09802003753737,217.13061407914566 419,187 C 460.90197996246263,156.86938592085434 505.4420021676492,115.78193978164899 564,107 C 622.5579978323508,98.21806021835101 695.133971291866,121.74162679425837 739,151 C 782.866028708134,180.25837320574163 798.0221126648867,215.25155304131752 849,206 C 899.9778873351133,196.74844695868248 986.777578048587,143.2521610404716 1033,115 C 1079.222421951413,86.74783895952841 1084.867575140765,83.73980279679611 1125,115 C 1165.132424859235,146.2601972032039 1239.7521213883526,211.78862777234397 1298,226 C 1356.2478786116474,240.21137222765603 1398.1239393058236,203.10568611382803 1440,166 C 1440,166 1440,500 1440,500 Z');
+                                }
+                                50%{
+                                  d: path('M 0,500 C 0,500 0,166 0,166 C 53.93572391551456,200.06755399296836 107.87144783102912,234.1351079859367 161,212 C 214.12855216897088,189.8648920140633 266.4499325913981,111.52712204922149 305,107 C 343.5500674086019,102.47287795077851 368.3288218033783,171.7564038171773 415,185 C 461.6711781966217,198.2435961828227 530.2347801950885,155.4472626820693 579,160 C 627.7652198049115,164.5527373179307 656.7320574162679,216.45454545454547 701,207 C 745.2679425837321,197.54545454545453 804.8369901398397,126.7345554997489 852,129 C 899.1630098601603,131.2654445002511 933.919982024373,206.60723254645907 986,215 C 1038.080017975627,223.39276745354093 1107.4830817626685,164.83651431441487 1163,134 C 1218.5169182373315,103.16348568558513 1260.1476909249518,100.04671019588147 1304,110 C 1347.8523090750482,119.95328980411853 1393.926154537524,142.97664490205926 1440,166 C 1440,166 1440,500 1440,500 Z');
+                                }
+                                75%{
+                                  d: path('M 0,500 C 0,500 0,166 0,166 C 41.18434270004494,187.6696317639906 82.36868540008987,209.33926352798116 125,216 C 167.63131459991013,222.66073647201884 211.70960109968547,214.31257765206587 262,201 C 312.2903989003145,187.68742234793413 368.7929102011683,169.4104258637553 422,174 C 475.2070897988317,178.5895741362447 525.118758095641,206.04571889291284 574,221 C 622.881241904359,235.95428110708716 670.7320574162679,238.40669856459328 713,221 C 755.2679425837321,203.59330143540672 791.9530122392871,166.327486848714 846,155 C 900.0469877607129,143.672513151286 971.4558936265828,158.2833540405509 1023,165 C 1074.5441063734172,171.7166459594491 1106.2234132543815,170.53909698908245 1144,174 C 1181.7765867456185,177.46090301091755 1225.6504533558907,185.56025800311932 1276,185 C 1326.3495466441093,184.43974199688068 1383.1747733220545,175.21987099844034 1440,166 C 1440,166 1440,500 1440,500 Z');
+                                }
+                                100%{
+                                  d: path('M 0,500 C 0,500 0,166 0,166 C 52.193832773797894,139.06152687091912 104.38766554759579,112.12305374183828 157,129 C 209.6123344524042,145.87694625816172 262.6431705834148,206.56931190356605 306,211 C 349.3568294165852,215.43068809643395 383.03965211874487,163.59969864389754 429,163 C 474.96034788125513,162.40030135610246 533.1982209416057,213.03189352084382 579,224 C 624.8017790583943,234.96810647915618 658.1674641148326,206.27272727272725 711,185 C 763.8325358851674,163.72727272727275 836.1319225990643,149.8771973882471 890,156 C 943.8680774009357,162.1228026117529 979.3048454889106,188.21848317428427 1012,187 C 1044.6951545110894,185.78151682571573 1074.6486954452935,157.24886991461577 1125,155 C 1175.3513045547065,152.75113008538423 1246.1003727299162,176.78603716725266 1302,183 C 1357.8996272700838,189.21396283274734 1398.949813635042,177.60698141637369 1440,166 C 1440,166 1440,500 1440,500 Z');
+                                }
+                              }</style><path d='M 0,500 C 0,500 0,166 0,166 C 52.193832773797894,139.06152687091912 104.38766554759579,112.12305374183828 157,129 C 209.6123344524042,145.87694625816172 262.6431705834148,206.56931190356605 306,211 C 349.3568294165852,215.43068809643395 383.03965211874487,163.59969864389754 429,163 C 474.96034788125513,162.40030135610246 533.1982209416057,213.03189352084382 579,224 C 624.8017790583943,234.96810647915618 658.1674641148326,206.27272727272725 711,185 C 763.8325358851674,163.72727272727275 836.1319225990643,149.8771973882471 890,156 C 943.8680774009357,162.1228026117529 979.3048454889106,188.21848317428427 1012,187 C 1044.6951545110894,185.78151682571573 1074.6486954452935,157.24886991461577 1125,155 C 1175.3513045547065,152.75113008538423 1246.1003727299162,176.78603716725266 1302,183 C 1357.8996272700838,189.21396283274734 1398.949813635042,177.60698141637369 1440,166 C 1440,166 1440,500 1440,500 Z' stroke='none' stroke-width='0' fill='#37e2d588' class='transition-all duration-300 ease-in-out delay-150 path-0' transform='rotate(-180 720 250)'></path><style>
+                              .path-1{
+                                animation:pathAnim-1 4s;
+                                animation-timing-function: linear;
+                                animation-iteration-count: infinite;
+                              }
+                              @keyframes pathAnim-1{
+                                0%{
+                                  d: path('M 0,500 C 0,500 0,333 0,333 C 57.292725157947615,350.0284966560047 114.58545031589523,367.0569933120093 161,365 C 207.41454968410477,362.9430066879907 242.95092389436672,341.8005234079675 281,335 C 319.0490761056333,328.1994765920325 359.6108541066378,335.740913056121 408,324 C 456.3891458933622,312.259086943879 512.6056596790821,281.2358243675488 568,282 C 623.3943403209179,282.7641756324512 677.9665071770335,315.3157894736842 725,328 C 772.0334928229665,340.6842105263158 811.5283116127838,333.5010177377144 864,325 C 916.4716883872162,316.4989822622856 981.9202463718314,306.680139575458 1026,317 C 1070.0797536281686,327.319860424542 1092.7907028998916,357.7784239604536 1129,358 C 1165.2092971001084,358.2215760395464 1214.9169420286025,328.2061645827276 1269,319 C 1323.0830579713975,309.7938354172724 1381.5415289856987,321.39691770863624 1440,333 C 1440,333 1440,500 1440,500 Z');
+                                }
+                                25%{
+                                  d: path('M 0,500 C 0,500 0,333 0,333 C 42.18496391657193,360.3365143144149 84.36992783314386,387.67302862882974 134,373 C 183.63007216685614,358.32697137117026 240.70525258399647,301.64439979909594 287,304 C 333.29474741600353,306.35560020090406 368.80906183087046,367.7493721747866 421,381 C 473.19093816912954,394.2506278252134 542.0585000925217,359.3581115017579 594,336 C 645.9414999074783,312.6418884982421 680.956937799043,300.81818181818176 728,313 C 775.043062200957,325.18181818181824 834.1137487113062,361.36916122551486 885,377 C 935.8862512886938,392.63083877448514 978.5880673557324,387.70517327975887 1027,365 C 1075.4119326442676,342.29482672024113 1129.5339818657644,301.81014565544956 1178,310 C 1226.4660181342356,318.18985434455044 1269.2760051812102,375.054244098443 1312,387 C 1354.7239948187898,398.945755901557 1397.361997409395,365.9728779507785 1440,333 C 1440,333 1440,500 1440,500 Z');
+                                }
+                                50%{
+                                  d: path('M 0,500 C 0,500 0,333 0,333 C 57.823812419043605,327.5839567527558 115.64762483808721,322.1679135055116 159,317 C 202.3523751619128,311.8320864944884 231.23331306669485,306.9123027307093 272,325 C 312.76668693330515,343.0876972692907 365.41912289513346,384.1828755716513 417,387 C 468.58087710486654,389.8171244283487 519.0901953527716,354.3561949826853 574,335 C 628.9098046472284,315.6438050173147 688.2200956937799,312.39234449760767 737,307 C 785.7799043062201,301.60765550239233 824.0294218721086,294.07442702688417 859,300 C 893.9705781278914,305.92557297311583 925.6622168177853,325.3099473948558 983,342 C 1040.3377831822147,358.6900526051442 1123.32171085675,372.68578339369265 1177,361 C 1230.67828914325,349.31421660630735 1255.0509397552141,311.9469190303735 1294,303 C 1332.9490602447859,294.0530809696265 1386.474530122393,313.52654048481327 1440,333 C 1440,333 1440,500 1440,500 Z');
+                                }
+                                75%{
+                                  d: path('M 0,500 C 0,500 0,333 0,333 C 51.10341272568664,352.90488778450396 102.20682545137328,372.8097755690079 154,354 C 205.79317454862672,335.1902244309921 258.2761109201935,277.6657855084723 300,283 C 341.7238890798065,288.3342144915277 372.6887308678527,356.5270823971028 419,378 C 465.3112691321473,399.4729176028972 526.9689656083957,374.2258849031167 572,355 C 617.0310343916043,335.7741150968833 645.4354066985645,322.56937799043055 698,328 C 750.5645933014355,333.43062200956945 827.2894075973461,357.4966031351609 877,373 C 926.7105924026539,388.5033968648391 949.4069629120515,395.444209468926 994,388 C 1038.5930370879485,380.555790531074 1105.0827407544475,358.72655898913524 1161,350 C 1216.9172592455525,341.27344101086476 1262.262074070158,345.6495545745328 1307,345 C 1351.737925929842,344.3504454254672 1395.8689629649211,338.6752227127336 1440,333 C 1440,333 1440,500 1440,500 Z');
+                                }
+                                100%{
+                                  d: path('M 0,500 C 0,500 0,333 0,333 C 57.292725157947615,350.0284966560047 114.58545031589523,367.0569933120093 161,365 C 207.41454968410477,362.9430066879907 242.95092389436672,341.8005234079675 281,335 C 319.0490761056333,328.1994765920325 359.6108541066378,335.740913056121 408,324 C 456.3891458933622,312.259086943879 512.6056596790821,281.2358243675488 568,282 C 623.3943403209179,282.7641756324512 677.9665071770335,315.3157894736842 725,328 C 772.0334928229665,340.6842105263158 811.5283116127838,333.5010177377144 864,325 C 916.4716883872162,316.4989822622856 981.9202463718314,306.680139575458 1026,317 C 1070.0797536281686,327.319860424542 1092.7907028998916,357.7784239604536 1129,358 C 1165.2092971001084,358.2215760395464 1214.9169420286025,328.2061645827276 1269,319 C 1323.0830579713975,309.7938354172724 1381.5415289856987,321.39691770863624 1440,333 C 1440,333 1440,500 1440,500 Z');
+                                }
+                              }</style><path d='M 0,500 C 0,500 0,333 0,333 C 57.292725157947615,350.0284966560047 114.58545031589523,367.0569933120093 161,365 C 207.41454968410477,362.9430066879907 242.95092389436672,341.8005234079675 281,335 C 319.0490761056333,328.1994765920325 359.6108541066378,335.740913056121 408,324 C 456.3891458933622,312.259086943879 512.6056596790821,281.2358243675488 568,282 C 623.3943403209179,282.7641756324512 677.9665071770335,315.3157894736842 725,328 C 772.0334928229665,340.6842105263158 811.5283116127838,333.5010177377144 864,325 C 916.4716883872162,316.4989822622856 981.9202463718314,306.680139575458 1026,317 C 1070.0797536281686,327.319860424542 1092.7907028998916,357.7784239604536 1129,358 C 1165.2092971001084,358.2215760395464 1214.9169420286025,328.2061645827276 1269,319 C 1323.0830579713975,309.7938354172724 1381.5415289856987,321.39691770863624 1440,333 C 1440,333 1440,500 1440,500 Z' stroke='none' stroke-width='0' fill='#37e2d5ff' class='transition-all duration-300 ease-in-out delay-150 path-1' transform='rotate(-180 720 250)'></path></svg>")
+                ImagePosition: =ImagePosition.Fill
+                RadiusTopLeft: =55
+                RadiusTopRight: =55
+                Transparency: =0.5
+                Width: =718
+                ZIndex: =2
+
+            ButtonGallery As gallery.galleryVertical:
+                Height: =755
+                Items: |-
+                    =Table(
+                        {
+                            ID: 1,
+                            Name: "Home",
+                            Logo: "<svg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px'
+                    	 viewBox='0 0 330.242 330.242' style='enable-background:new 0 0 330.242 330.242;' xml:space='preserve'>
+                    <path d='M324.442,129.811l-41.321-33.677V42.275c0-6.065-4.935-11-11-11h-26c-6.065,0-11,4.935-11,11v14.737l-55.213-44.999
+                    	c-3.994-3.254-9.258-5.047-14.822-5.047c-5.542,0-10.781,1.782-14.753,5.019L5.8,129.81c-6.567,5.351-6.173,10.012-5.354,12.314
+                    	c0.817,2.297,3.448,6.151,11.884,6.151h19.791v154.947c0,11.058,8.972,20.053,20,20.053h62.5c10.935,0,19.5-8.809,19.5-20.053
+                    	v-63.541c0-5.446,5.005-10.405,10.5-10.405h42c5.238,0,9.5,4.668,9.5,10.405v63.541c0,10.87,9.388,20.053,20.5,20.053h61.5
+                    	c11.028,0,20-8.996,20-20.053V148.275h19.791c8.436,0,11.066-3.854,11.884-6.151C330.615,139.822,331.009,135.161,324.442,129.811z' fill='#B9BEC4'
+                    	/>
+                    </svg>",
+                        Pressed:"<svg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px'
+                    	 viewBox='0 0 330.242 330.242' style='enable-background:new 0 0 330.242 330.242;' xml:space='preserve'>
+                    <path d='M324.442,129.811l-41.321-33.677V42.275c0-6.065-4.935-11-11-11h-26c-6.065,0-11,4.935-11,11v14.737l-55.213-44.999
+                    	c-3.994-3.254-9.258-5.047-14.822-5.047c-5.542,0-10.781,1.782-14.753,5.019L5.8,129.81c-6.567,5.351-6.173,10.012-5.354,12.314
+                    	c0.817,2.297,3.448,6.151,11.884,6.151h19.791v154.947c0,11.058,8.972,20.053,20,20.053h62.5c10.935,0,19.5-8.809,19.5-20.053
+                    	v-63.541c0-5.446,5.005-10.405,10.5-10.405h42c5.238,0,9.5,4.668,9.5,10.405v63.541c0,10.87,9.388,20.053,20.5,20.053h61.5
+                    	c11.028,0,20-8.996,20-20.053V148.275h19.791c8.436,0,11.066-3.854,11.884-6.151C330.615,139.822,331.009,135.161,324.442,129.811z' fill='#37E2D5'
+                    	/>
+                    </svg>"
+                        },
+                        {
+                            ID: 2,
+                            Name: "Discover",
+                            Logo: "<svg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px'
+                    	 viewBox='0 0 183.792 183.792' style='enable-background:new 0 0 183.792 183.792;' xml:space='preserve'>
+                    <path d='M54.734,9.053C39.12,18.067,27.95,32.624,23.284,50.039c-4.667,17.415-2.271,35.606,6.743,51.22
+                    	c12.023,20.823,34.441,33.759,58.508,33.759c7.599,0,15.139-1.308,22.287-3.818l30.364,52.592l21.65-12.5l-30.359-52.583
+                    	c10.255-8.774,17.638-20.411,21.207-33.73c4.666-17.415,2.27-35.605-6.744-51.22C134.918,12.936,112.499,0,88.433,0
+                    	C76.645,0,64.992,3.13,54.734,9.053z M125.29,46.259c5.676,9.831,7.184,21.285,4.246,32.25c-2.938,10.965-9.971,20.13-19.802,25.806
+                    	c-6.462,3.731-13.793,5.703-21.199,5.703c-15.163,0-29.286-8.146-36.857-21.259c-5.676-9.831-7.184-21.284-4.245-32.25
+                    	c2.938-10.965,9.971-20.13,19.802-25.807C73.696,26.972,81.027,25,88.433,25C103.597,25,117.719,33.146,125.29,46.259z' fill='#B9BEC4'/>
+                    </svg>",
+                    Pressed:"<svg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px'
+                    	 viewBox='0 0 183.792 183.792' style='enable-background:new 0 0 183.792 183.792;' xml:space='preserve'>
+                    <path d='M54.734,9.053C39.12,18.067,27.95,32.624,23.284,50.039c-4.667,17.415-2.271,35.606,6.743,51.22
+                    	c12.023,20.823,34.441,33.759,58.508,33.759c7.599,0,15.139-1.308,22.287-3.818l30.364,52.592l21.65-12.5l-30.359-52.583
+                    	c10.255-8.774,17.638-20.411,21.207-33.73c4.666-17.415,2.27-35.605-6.744-51.22C134.918,12.936,112.499,0,88.433,0
+                    	C76.645,0,64.992,3.13,54.734,9.053z M125.29,46.259c5.676,9.831,7.184,21.285,4.246,32.25c-2.938,10.965-9.971,20.13-19.802,25.806
+                    	c-6.462,3.731-13.793,5.703-21.199,5.703c-15.163,0-29.286-8.146-36.857-21.259c-5.676-9.831-7.184-21.284-4.245-32.25
+                    	c2.938-10.965,9.971-20.13,19.802-25.807C73.696,26.972,81.027,25,88.433,25C103.597,25,117.719,33.146,125.29,46.259z' fill='#37E2D5'/>
+                    </svg>"
+                        },
+                        {
+                            ID: 3,
+                            Name: "Library",
+                            Logo: "<svg width='36px' height='36px' viewBox='0 0 36 36' version='1.1'  preserveAspectRatio='xMidYMid meet' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+                        <title>library-solid</title>
+                        <path fill='#B9BEC4' d='M12.75,3H5.25A1.15,1.15,0,0,0,4,4V33H14V4A1.15,1.15,0,0,0,12.75,3Z' class='clr-i-solid clr-i-solid-path-1'></path><path d='M33.77,31.09l-6.94-18.3a1,1,0,0,0-1.29-.58L22,13.59V9a1,1,0,0,0-1-1H16V33h6V14.69L28.93,33Z' class='clr-i-solid clr-i-solid-path-2' fill='#B9BEC4'></path>
+                        <rect x='0' y='0' width='36' height='36' fill-opacity='0' fill='#B9BEC4'/>
+                    </svg>",
+                    Pressed:"<svg width='36px' height='36px' viewBox='0 0 36 36' version='1.1'  preserveAspectRatio='xMidYMid meet' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+                        <title>library-solid</title>
+                        <path fill='#37E2D5' d='M12.75,3H5.25A1.15,1.15,0,0,0,4,4V33H14V4A1.15,1.15,0,0,0,12.75,3Z' class='clr-i-solid clr-i-solid-path-1'></path><path d='M33.77,31.09l-6.94-18.3a1,1,0,0,0-1.29-.58L22,13.59V9a1,1,0,0,0-1-1H16V33h6V14.69L28.93,33Z' class='clr-i-solid clr-i-solid-path-2' fill='#37E2D5'></path>
+                        <rect x='0' y='0' width='36' height='36' fill-opacity='0' fill='#37E2D5'/>
+                    </svg>"
+                        },
+                        {
+                            ID: 4,
+                            Name: "Social",
+                            Logo: "<svg width='24px' height='24px' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><g data-name='Layer 2'><g data-name='people'><rect width='24' height='24' opacity='0' fill='#B9BEC4'/><path d='M9 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4z' fill='#B9BEC4'/><path d='M17 13a3 3 0 1 0-3-3 3 3 0 0 0 3 3z' fill='#B9BEC4'/><path d='M21 20a1 1 0 0 0 1-1 5 5 0 0 0-8.06-3.95A7 7 0 0 0 2 20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1' fill='#B9BEC4'/></g></g></svg>",
+                            Pressed:"<svg width='24px' height='24px' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><g data-name='Layer 2'><g data-name='people'><rect width='24' height='24' opacity='0' fill='#37E2D5'/><path d='M9 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4z' fill='#37E2D5'/><path d='M17 13a3 3 0 1 0-3-3 3 3 0 0 0 3 3z' fill='#37E2D5'/><path d='M21 20a1 1 0 0 0 1-1 5 5 0 0 0-8.06-3.95A7 7 0 0 0 2 20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1' fill='#37E2D5'/></g></g></svg>"
+                        },
+                        {
+                            ID: 5,
+                            Name: "Settings",
+                            Logo: "<svg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px'
+                    	 viewBox='0 0 458.317 458.317' style='enable-background:new 0 0 458.317 458.317;' xml:space='preserve'>
+                    <g>
+                    	<g>
+                    		<path d='M446.185,179.159h-64.768c-2.536-7.702-5.636-15.15-9.26-22.29l45.818-45.818c4.737-4.737,4.737-12.416,0-17.152
+                    			L364.416,40.34c-4.737-4.737-12.416-4.737-17.152,0l-45.818,45.818c-7.14-3.624-14.587-6.724-22.289-9.26V12.131
+                    			c0.001-6.699-5.429-12.129-12.128-12.129h-75.743c-6.698,0-12.129,5.43-12.129,12.128v64.768
+                    			c-7.702,2.535-15.149,5.636-22.29,9.26L111.05,40.341c-4.737-4.737-12.416-4.737-17.152,0L40.339,93.9
+                    			c-4.737,4.736-4.737,12.416,0,17.152l45.817,45.817c-3.624,7.14-6.725,14.588-9.26,22.29H12.129C5.43,179.159,0,184.59,0,191.288
+                    			v75.743c0,6.698,5.43,12.128,12.129,12.128h64.768c2.536,7.702,5.636,15.149,9.26,22.29L40.34,347.266
+                    			c-4.737,4.736-4.737,12.416,0,17.152l53.559,53.559c4.737,4.736,12.416,4.736,17.152,0l45.817-45.817
+                    			c7.14,3.624,14.587,6.725,22.29,9.26v64.768c0,6.698,5.43,12.128,12.129,12.128h75.743c6.698,0,12.129-5.43,12.129-12.128v-64.768
+                    			c7.702-2.535,15.149-5.636,22.289-9.26l45.818,45.817c4.737,4.736,12.416,4.736,17.152,0l53.559-53.559
+                    			c4.737-4.737,4.737-12.416,0-17.152l-45.817-45.817c3.624-7.14,6.724-14.587,9.26-22.289h64.768
+                    			c6.698,0,12.129-5.43,12.129-12.128v-75.743C458.314,184.59,452.884,179.159,446.185,179.159z M229.157,289.542
+                    			c-33.349,0-60.384-27.035-60.384-60.384s27.035-60.384,60.384-60.384s60.384,27.035,60.384,60.384
+                    			S262.506,289.542,229.157,289.542z' fill='#B9BEC4'/>
+                    	</g>
+                    </g>
+                    </svg>",
+                    Pressed:"<svg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px'
+                    	 viewBox='0 0 458.317 458.317' style='enable-background:new 0 0 458.317 458.317;' xml:space='preserve'>
+                    <g>
+                    	<g>
+                    		<path d='M446.185,179.159h-64.768c-2.536-7.702-5.636-15.15-9.26-22.29l45.818-45.818c4.737-4.737,4.737-12.416,0-17.152
+                    			L364.416,40.34c-4.737-4.737-12.416-4.737-17.152,0l-45.818,45.818c-7.14-3.624-14.587-6.724-22.289-9.26V12.131
+                    			c0.001-6.699-5.429-12.129-12.128-12.129h-75.743c-6.698,0-12.129,5.43-12.129,12.128v64.768
+                    			c-7.702,2.535-15.149,5.636-22.29,9.26L111.05,40.341c-4.737-4.737-12.416-4.737-17.152,0L40.339,93.9
+                    			c-4.737,4.736-4.737,12.416,0,17.152l45.817,45.817c-3.624,7.14-6.725,14.588-9.26,22.29H12.129C5.43,179.159,0,184.59,0,191.288
+                    			v75.743c0,6.698,5.43,12.128,12.129,12.128h64.768c2.536,7.702,5.636,15.149,9.26,22.29L40.34,347.266
+                    			c-4.737,4.736-4.737,12.416,0,17.152l53.559,53.559c4.737,4.736,12.416,4.736,17.152,0l45.817-45.817
+                    			c7.14,3.624,14.587,6.725,22.29,9.26v64.768c0,6.698,5.43,12.128,12.129,12.128h75.743c6.698,0,12.129-5.43,12.129-12.128v-64.768
+                    			c7.702-2.535,15.149-5.636,22.289-9.26l45.818,45.817c4.737,4.736,12.416,4.736,17.152,0l53.559-53.559
+                    			c4.737-4.737,4.737-12.416,0-17.152l-45.817-45.817c3.624-7.14,6.724-14.587,9.26-22.289h64.768
+                    			c6.698,0,12.129-5.43,12.129-12.128v-75.743C458.314,184.59,452.884,179.159,446.185,179.159z M229.157,289.542
+                    			c-33.349,0-60.384-27.035-60.384-60.384s27.035-60.384,60.384-60.384s60.384,27.035,60.384,60.384
+                    			S262.506,289.542,229.157,289.542z' fill='#37E2D5'/>
+                    	</g>
+                    </g>
+                    </svg>"
+                        }
+                    )
+                Layout: =Layout.Vertical
+                TemplateSize: =Self.Width
+                Width: =Parent.Width/5
+                Y: =245
+                ZIndex: =3
+
+                NavButton As htmlViewer:
+                    Height: =Parent.TemplateHeight
+                    HtmlText: |-
+                        =If(
+                            ThisItem.IsSelected,
+                            "<div style='
+                          margin: 0;
+                          position: absolute;
+                          top: 50%;
+                          left: 50%;
+                          transform: translate(-50%, -50%);
+                        width:60%;
+                        height:60%; 
+                        border-radius: 18px;
+                        background: #40474f;
+                        box-shadow: inset 4px 4px 8px #23272b,
+                                    inset -4px -4px 8px #5d6773;'>
+                        </div>",
+                            "<div style='
+                          margin: 0;
+                          position: absolute;
+                          top: 50%;
+                          left: 50%;
+                          transform: translate(-50%, -50%);
+                        width:60%;
+                        height:60%; 
+                        border-radius: 18px;
+                        background: linear-gradient(145deg, #3a4047, #444c55);
+                        box-shadow:  6px 6px 12px #23272b,
+                                     -1px -1px 3px #5d6773;'>
+                        </div>"
+                        )
+                    OnSelect: =Select(Parent)
+                    Width: =Parent.TemplateWidth
+                    ZIndex: =1
+
+                NavIcon As image:
+                    Height: =Parent.TemplateHeight*0.6
+                    HoverFill: =If(ThisItem.IsSelected,RGBA(0,0,0,0),RGBA(0, 0, 0, 0.2))
+                    Image: |-
+                        =If(ThisItem.IsSelected,"data:image/svg+xml;utf8, "&EncodeUrl(ThisItem.Pressed),"data:image/svg+xml;utf8, "&EncodeUrl(ThisItem.Logo))
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =25
+                    PaddingLeft: =25
+                    PaddingRight: =25
+                    PaddingTop: =25
+                    RadiusBottomLeft: =18
+                    RadiusBottomRight: =18
+                    RadiusTopLeft: =18
+                    RadiusTopRight: =18
+                    Width: =Parent.TemplateWidth*0.6
+                    X: =Parent.TemplateWidth/2-Self.Width/2
+                    Y: =Parent.TemplateHeight/2-Self.Height/2
+                    ZIndex: =2
+
+            PlayLength As htmlViewer:
+                Height: =50
+                HtmlText: |-
+                    ="<div style='
+                      margin: 0;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:95%px;
+                    height:5px; 
+                    border-radius: 50px;
+                    background: #FFF;
+                    '>
+                    </div>"
+                Width: =Parent.Width-50
+                X: =Parent.Width/2-Self.Width/2
+                Y: =1122
+                ZIndex: =4
+
+            PlayTimer As htmlViewer:
+                Height: =60
+                HtmlText: |-
+                    ="<div style='
+                      margin: 0;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:40%;
+                    height:40%; 
+                    border-radius: 50%;
+                    background: linear-gradient(145deg, #e6e6e6, #ffffff);
+                    box-shadow:  6px 6px 12px #434a53,
+                                 -1px -1px 3px #8796a9'>
+                    </div>"
+                Width: =60
+                X: =((640/playSong.SongLength)*SongPlayer.Time)
+                Y: =1117
+                ZIndex: =5
+
+            PlayingSong As label:
+                Color: =RGBA(255, 255, 255, 1)
+                Font: ="Agency FB"
+                FontWeight: =FontWeight.Semibold
+                Height: =60
+                Size: =16
+                Text: =playSong.Name
+                Width: =470
+                X: =223
+                Y: =1050
+                ZIndex: =6
+
+            PlayingArtist As label:
+                Color: =RGBA(255, 255, 255, 1)
+                Font: ="Agency FB"
+                Height: =60
+                Text: =playSong.Artist
+                Width: =470
+                X: =223
+                Y: =1075
+                ZIndex: =7
+
+            PlayingImage As image:
+                Height: =60
+                Image: =playSong.Artwork
+                ImagePosition: =ImagePosition.Fill
+                RadiusBottomLeft: =10
+                RadiusBottomRight: =10
+                RadiusTopLeft: =10
+                RadiusTopRight: =10
+                Width: =60
+                X: =143
+                Y: =1062
+                ZIndex: =8
+
+            BGBottomSeparator As htmlViewer:
+                Height: =50
+                HtmlText: |-
+                    ="<div style='
+                      margin: 0;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:100%;
+                    height:2px;
+                    background: #40474f;
+                    box-shadow:  2px 2px 2px #23272b,
+                                 -2px -2px 2px #5d6773;
+                    
+                    '>
+                    </div>"
+                Width: =Parent.Width-2
+                X: =Parent.Width/2-Self.Width/2
+                Y: =1000
+                ZIndex: =9
+
+            BGTopSeparator As htmlViewer:
+                Height: =50
+                HtmlText: |-
+                    ="<div style='
+                      margin: 0;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:100%;
+                    height:2px;
+                    background: #40474f;
+                    box-shadow:  2px 2px 2px #23272b,
+                                 -2px -2px 2px #5d6773;
+                    
+                    '>
+                    </div>"
+                Width: =Parent.Width-2
+                X: =1
+                Y: =195
+                ZIndex: =10
+
+            SelectionName As htmlViewer:
+                AutoHeight: =true
+                Font: ="Agency FB"
+                Height: =67
+                HtmlText: |-
+                    ="<div style='position:relative;
+                            color: #FFFFFF;
+                            font-size: 60px;
+                            text-shadow: 4px 4px 8px #23272b;
+                    '>" & ButtonGallery.Selected.Name & "</div>"
+                Size: =16
+                Width: =350
+                X: =35
+                Y: =127
+                ZIndex: =11
+
+        BigPlayBG As htmlViewer:
+            Height: =100
+            HtmlText: |-
+                =If(IsBlank(pauseSong),"<div style='
+                  margin: 0;
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                width:70%;
+                height:70%; 
+                border-radius: 50%;
+                background: #40474f;
+                box-shadow: inset 4px 4px 8px #23272b,
+                            inset -4px -4px 8px #5d6773;'>
+                </div>",
+                "<div style='
+                  margin: 0;
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                width:70%;
+                height:70%; 
+                border-radius: 50%;
+                background: linear-gradient(145deg, #3a4047, #444c55);
+                box-shadow:  6px 6px 12px #23272b,
+                             -1px -1px 3px #5d6773;'>
+                </div>")
+            Width: =100
+            X: =311
+            Y: =1178
+            ZIndex: =82
+
+        BigPrevBG As htmlViewer:
+            Height: =80
+            HtmlText: |-
+                =    "<div style='
+                  margin: 0;
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                width:70%;
+                height:70%; 
+                border-radius: 50%;
+                background: linear-gradient(145deg, #3a4047, #444c55);
+                box-shadow:  4px 4px 8px #23272b,
+                             -1px -1px 3px #5d6773;'>
+                </div>"
+            Width: =80
+            X: =190
+            Y: =1187
+            ZIndex: =83
+
+        BigNextBG As htmlViewer:
+            Height: =80
+            HtmlText: |-
+                =    "<div style='
+                  margin: 0;
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                width:70%;
+                height:70%; 
+                border-radius: 50%;
+                background: linear-gradient(145deg, #3a4047, #444c55);
+                box-shadow:  4px 4px 8px #23272b,
+                             -1px -1px 3px #5d6773;'>
+                </div>"
+            Width: =80
+            X: =448
+            Y: =1188
+            ZIndex: =84
+
+        BigPrevIcon As image:
+            Height: =80*0.7
+            HoverFill: =RGBA(0, 0, 0, 0.2)
+            Image: |-
+                ="data:image/svg+xml;utf8, "&EncodeUrl("<svg width='16px' height='16px' viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg' fill='#B9BEC4' class='bi bi-skip-start-fill'>
+                  <path d='M4 4a.5.5 0 0 1 1 0v3.248l6.267-3.636c.54-.313 1.232.066 1.232.696v7.384c0 .63-.692 1.01-1.232.697L5 8.753V12a.5.5 0 0 1-1 0V4z'/>
+                </svg>
+                ")
+            OnSelect: |-
+                =Set(varPrev,playSong.RowNumber);
+                Set(
+                    pauseSong,
+                    Blank()
+                );
+                Set(
+                    playSong,
+                First(Filter(SortByColumns(musicplayersongs,"crbfe_rownumber",Descending),RowNumber<varPrev))
+                );
+            PaddingBottom: =12
+            PaddingLeft: =12
+            PaddingRight: =12
+            PaddingTop: =12
+            RadiusBottomLeft: =100
+            RadiusBottomRight: =100
+            RadiusTopLeft: =100
+            RadiusTopRight: =100
+            Width: =80*0.7
+            X: =202
+            Y: =1199
+            ZIndex: =85
+
+        BigNextIcon As image:
+            Height: =80*0.7
+            HoverFill: =RGBA(0, 0, 0, 0.2)
+            Image: |-
+                ="data:image/svg+xml;utf8, "&EncodeUrl("<svg width='16px' height='16px' viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg' fill='#B9BEC4' class='bi bi-skip-start-fill'>
+                  <path d='M4 4a.5.5 0 0 1 1 0v3.248l6.267-3.636c.54-.313 1.232.066 1.232.696v7.384c0 .63-.692 1.01-1.232.697L5 8.753V12a.5.5 0 0 1-1 0V4z'/>
+                </svg>
+                ")
+            ImageRotation: =ImageRotation.Rotate180
+            OnSelect: |-
+                =Set(varSkip,playSong.RowNumber);
+                Set(playSong,Blank());
+                Set(
+                    pauseSong,
+                    Blank()
+                );
+                Set(
+                    playSong,
+                First(Filter(SortByColumns(musicplayersongs,"crbfe_rownumber",Ascending),RowNumber>varSkip))
+                );
+            PaddingBottom: =12
+            PaddingLeft: =12
+            PaddingRight: =12
+            PaddingTop: =12
+            RadiusBottomLeft: =100
+            RadiusBottomRight: =100
+            RadiusTopLeft: =100
+            RadiusTopRight: =100
+            Width: =80*0.7
+            X: =460
+            Y: =1200
+            ZIndex: =86
+
+        grpSocial As group:
+            Height: =5
+            Width: =5
+            X: =40
+            Y: =40
+            ZIndex: =86
+
+            AccountSettingsBG As htmlViewer:
+                Height: =200
+                HtmlText: |-
+                    ="<div style='
+                      margin: 0;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:90%;
+                    height:65%; 
+                    border-radius: 500px;
+                    background: rgb(55,226,213);
+                    background: linear-gradient(135deg, rgba(55,226,213,1) 0%, rgba(26,98,93,1) 100%);
+                    box-shadow:  6px 6px 12px #23272b,
+                                 -1px -1px 3px #5d6773;'>
+                    </div>"
+                Visible: =ButtonGallery.Selected.Name="Social"
+                Width: =500
+                X: =165
+                Y: =796
+                ZIndex: =62
+
+            UserProfileImg As image:
+                Image: ='2021-08-29'
+                RadiusBottomLeft: =100
+                RadiusBottomRight: =100
+                RadiusTopLeft: =100
+                RadiusTopRight: =100
+                Visible: =ButtonGallery.Selected.Name="Social"
+                X: =525
+                Y: =846
+                ZIndex: =63
+
+            AccountEmail As label:
+                AutoHeight: =true
+                Color: =RGBA(255, 255, 255, 1)
+                Font: ="Agency FB"
+                FontWeight: =FontWeight.Semibold
+                Height: =60
+                Size: =16
+                Text: ="Rhys Kelsey (visuallybasic.com)"
+                Visible: =ButtonGallery.Selected.Name="Social"
+                Width: =297
+                X: =230
+                Y: =866
+                ZIndex: =64
+
+            SignOut As label:
+                AutoHeight: =true
+                Color: =RGBA(255, 255, 255, 1)
+                Font: ="Agency FB"
+                Height: =60
+                HoverColor: =ColorFade(Self.Color,-60%)
+                Size: =16
+                Text: ="Sign Out"
+                Visible: =ButtonGallery.Selected.Name="Social"
+                Width: =297
+                X: =230
+                Y: =896
+                ZIndex: =65
+
+            FriendsGallery As gallery.galleryVertical:
+                Height: =435
+                Items: =SoftUIFriends
+                Layout: =Layout.Vertical
+                ShowScrollbar: =false
+                TemplateSize: =100
+                Visible: =ButtonGallery.Selected.Name="Social"
+                Width: =498
+                X: =150
+                Y: =375
+                ZIndex: =69
+
+                OnlineCheck As htmlViewer:
+                    Height: =Parent.TemplateHeight
+                    HtmlText: |-
+                        =If(ThisItem.Online.Value="No","<div style='
+                          margin: 0;
+                          position: absolute;
+                          top: 50%;
+                          left: 50%;
+                          transform: translate(-50%, -50%);
+                        width:10%;
+                        height:10%px; 
+                        border-radius: 50%;
+                        background: #40474f;
+                        box-shadow: inset 1px 1px 2px #292d33,
+                                    inset -1px -1px 2px #57616b;'>
+                        </div>","<div style='
+                          margin: 0;
+                          position: absolute;
+                          top: 50%;
+                          left: 50%;
+                          transform: translate(-50%, -50%);
+                        width:10%;
+                        height:10%px; 
+                        border-radius: 50%;
+                        background: #37E2D5;
+                        box-shadow: inset 1px 1px 2px #239188,
+                                    inset -1px -1px 2px #4bffff;'>
+                        </div>")
+                    OnSelect: =Select(Parent)
+                    Width: =Self.Height
+                    X: =390
+                    ZIndex: =1
+
+                FriendName As label:
+                    AutoHeight: =true
+                    Color: =RGBA(255, 255, 255, 1)
+                    Font: ="Agency FB"
+                    FontWeight: =FontWeight.Semibold
+                    Height: =60
+                    Size: =16
+                    Text: =ThisItem.Title
+                    Width: =Parent.TemplateWidth-(Self.X*2)
+                    X: =138
+                    Y: =20
+                    ZIndex: =3
+
+                FriendStatus As label:
+                    Color: =If(ThisItem.Online.Value="Yes",White,RGBA(35, 39, 43,1))
+                    Font: ="Agency FB"
+                    Height: =27
+                    Text: =If(ThisItem.Online.Value="Yes",ThisItem.Song & " by " & ThisItem.Artist,"Offline")
+                    Width: =224
+                    X: =166
+                    Y: =50
+                    ZIndex: =4
+
+                FriendIconBG As htmlViewer:
+                    Height: =Parent.TemplateHeight
+                    HtmlText: |-
+                        ="<div style='
+                          margin: 0;
+                          position: absolute;
+                          top: 50%;
+                          left: 50%;
+                          transform: translate(-50%, -50%);
+                        width:55%;
+                        height:55%px; 
+                        border-radius: 50%;
+                        background: linear-gradient(145deg, #3a4047, #444c55);
+                        box-shadow:  6px 6px 12px #23272b,
+                                     -1px -1px 3px #5d6773;'>
+                        </div>"
+                    OnSelect: =Select(Parent)
+                    Width: =Self.Height
+                    X: =41
+                    ZIndex: =5
+
+                FriendPic As image:
+                    BorderColor: =RGBA(0, 0, 0, 0)
+                    BorderThickness: =5
+                    Height: =Parent.TemplateHeight*0.55
+                    Image: =ThisItem.Image
+                    OnSelect: =Select(Parent)
+                    RadiusBottomLeft: =100
+                    RadiusBottomRight: =100
+                    RadiusTopLeft: =100
+                    RadiusTopRight: =100
+                    Width: =Self.Height
+                    X: =63
+                    Y: =22
+                    ZIndex: =6
+
+                FriendPlayingIcon As image:
+                    Height: =20
+                    Image: |-
+                        =If(ThisItem.Online.Value="Yes","data:image/svg+xml;utf8, "&EncodeUrl("<svg width='512px' height='512px' viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'><path fill='#B9BEC4' d='M468.53 236.03H486v39.94h-17.47v-39.94zm-34.426 51.634h17.47v-63.328h-17.47v63.328zm-33.848 32.756h17.47V191.58h-17.47v128.84zm-32.177 25.276h17.47V167.483h-17.47v178.17zm-34.448-43.521h17.47v-92.35h-17.47v92.35zm-34.994 69.879h17.47v-236.06h-17.525v236.06zM264.2 405.9h17.47V106.1H264.2V405.9zm-33.848-46.284h17.47V152.383h-17.47v207.234zm-35.016-58.85h17.47v-87.35h-17.47v87.35zm-33.847-20.823h17.47V231.98h-17.47v48.042zm-33.848 25.66h17.47v-99.24h-17.47v99.272zm-33.302 48.04h17.47V152.678H94.34v201zm-33.847-30.702h17.47V187.333h-17.47v135.642zM26 287.664h17.47v-63.328H26v63.328z'/></svg>"),"data:image/svg+xml;utf8, "&EncodeUrl("<svg width='512px' height='512px' viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'><path fill='#23272b
+                        ' d='M468.53 236.03H486v39.94h-17.47v-39.94zm-34.426 51.634h17.47v-63.328h-17.47v63.328zm-33.848 32.756h17.47V191.58h-17.47v128.84zm-32.177 25.276h17.47V167.483h-17.47v178.17zm-34.448-43.521h17.47v-92.35h-17.47v92.35zm-34.994 69.879h17.47v-236.06h-17.525v236.06zM264.2 405.9h17.47V106.1H264.2V405.9zm-33.848-46.284h17.47V152.383h-17.47v207.234zm-35.016-58.85h17.47v-87.35h-17.47v87.35zm-33.847-20.823h17.47V231.98h-17.47v48.042zm-33.848 25.66h17.47v-99.24h-17.47v99.272zm-33.302 48.04h17.47V152.678H94.34v201zm-33.847-30.702h17.47V187.333h-17.47v135.642zM26 287.664h17.47v-63.328H26v63.328z'/></svg>"))
+                    OnSelect: =Select(Parent)
+                    Width: =20
+                    X: =146
+                    Y: =53
+                    ZIndex: =7
+
+                FriendPlayingIndicator As icon.VerticalLine:
+                    Color: =RGBA(35, 39, 43, 1)
+                    DisabledColor: =RGBA(35, 39, 43, 1)
+                    DisplayMode: =DisplayMode.Disabled
+                    Height: =20
+                    Icon: =Icon.VerticalLine
+                    OnSelect: =Select(Parent)
+                    Rotation: =45
+                    Visible: =ThisItem.Online.Value<>"Yes"
+                    Width: =20
+                    X: =146
+                    Y: =53
+                    ZIndex: =9
+
+            FBBG As htmlViewer:
+                Height: =100
+                HtmlText: |-
+                    ="<div style='
+                      margin: 0;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:55%;
+                    height:55%px; 
+                    border-radius: 50%;
+                    background: linear-gradient(145deg, #3a4047, #444c55);
+                    box-shadow:  6px 6px 12px #23272b,
+                                 -1px -1px 3px #5d6773;'>
+                    </div>"
+                OnSelect: =
+                Visible: =ButtonGallery.Selected.Name="Social"
+                Width: =Self.Height
+                X: =195
+                Y: =269
+                ZIndex: =70
+
+            FBLogo As image:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderThickness: =5
+                Height: =55
+                HoverBorderColor: =RGBA(55, 83, 140, 1)
+                Image: |-
+                    ="data:image/svg+xml;utf8, "&EncodeUrl("<svg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px'
+                    	 viewBox='0 0 512.002 512.002' style='enable-background:new 0 0 512.002 512.002;' xml:space='preserve'>
+                    <circle style='fill:#4E598F;' cx='256.001' cy='256' r='256'/>
+                    <path style='fill:#364270;' d='M511.596,241.7L391.019,121.085c-1.998,0.605-6.982-1.714-9.173-1.274
+                    	c-51.717,8.62-101.71,0-151.704,13.791c-24.135,6.896-25.859,36.202-34.478,55.165c-12.067,34.478-10.343,72.404-25.859,105.158
+                    	c-10.343,22.411-34.478,36.202-43.098,62.061c-2.875,10.785-2.705,24.379-5.956,34.69l120.98,120.922
+                    	c4.725,0.26,9.48,0.403,14.269,0.403c141.384,0,256-114.616,256-256C512.001,251.201,511.858,246.434,511.596,241.7z'/>
+                    <g>
+                    	<path style='fill:#FFFFFF;' d='M363.043,109.466H148.958c-21.809,0-39.49,17.68-39.49,39.49v214.085
+                    		c0,21.811,17.68,39.49,39.49,39.49h105.584l0.183-104.722h-27.21c-3.536,0-6.406-2.86-6.418-6.396l-0.133-33.759
+                    		c-0.014-3.553,2.867-6.444,6.42-6.444h27.162v-32.618c0-37.852,23.118-58.463,56.884-58.463h27.71c3.543,0,6.42,2.874,6.42,6.42
+                    		v28.463c0,3.546-2.874,6.42-6.416,6.42l-17.006,0.01c-18.363,0-21.921,8.725-21.921,21.533v28.239h40.351
+                    		c3.848,0,6.83,3.358,6.375,7.173l-4.001,33.759c-0.381,3.232-3.122,5.665-6.375,5.665h-36.168l-0.183,104.726h62.826
+                    		c21.809,0,39.49-17.682,39.49-39.491v-214.09C402.533,127.147,384.852,109.466,363.043,109.466L363.043,109.466z'/>
+                    	<polygon style='fill:#FFFFFF;' points='254.542,402.53 254.725,297.808 254.277,297.808 254.277,402.53 	'/>
+                    </g>
+                    <path style='fill:#D1D1D1;' d='M363.043,109.466H254.277v141.741h0.269V218.59c0-37.852,23.118-58.463,56.884-58.463h27.71
+                    	c3.543,0,6.42,2.874,6.42,6.42v28.463c0,3.546-2.874,6.42-6.416,6.42l-17.006,0.01c-18.363,0-21.921,8.725-21.921,21.533v28.238
+                    	h40.351c3.848,0,6.83,3.358,6.375,7.173l-4.001,33.759c-0.381,3.232-3.122,5.665-6.375,5.665h-36.168l-0.183,104.726h62.826
+                    	c21.809,0,39.49-17.682,39.49-39.491V148.956C402.533,127.147,384.852,109.466,363.043,109.466z'/>
+                    </svg>")
+                RadiusBottomLeft: =100
+                RadiusBottomRight: =100
+                RadiusTopLeft: =100
+                RadiusTopRight: =100
+                Visible: =ButtonGallery.Selected.Name="Social"
+                Width: =55
+                X: =217
+                Y: =291
+                ZIndex: =71
+
+            InstaBG As htmlViewer:
+                Height: =100
+                HtmlText: |-
+                    ="<div style='
+                      margin: 0;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:55%;
+                    height:55%px; 
+                    border-radius: 50%;
+                    background: linear-gradient(145deg, #3a4047, #444c55);
+                    box-shadow:  6px 6px 12px #23272b,
+                                 -1px -1px 3px #5d6773;'>
+                    </div>"
+                OnSelect: =
+                Visible: =ButtonGallery.Selected.Name="Social"
+                Width: =Self.Height
+                X: =545
+                Y: =269
+                ZIndex: =72
+
+            InstaLogo As image:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderThickness: =5
+                Height: =55
+                HoverBorderColor: =RGBA(109, 49, 162, 1)
+                Image: |-
+                    ="data:image/svg+xml;utf8, "&EncodeUrl("<svg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px'
+                    	 viewBox='0 0 512 512' style='enable-background:new 0 0 512 512;' xml:space='preserve'>
+                    <circle style='fill:#6C27B3;' cx='256' cy='256' r='256'/>
+                    <path style='fill:#501A96;' d='M374.71,132.922c-30.587,3.872-62.479,3.737-94.575,0.681
+                    	c-44.822-3.448-110.33-24.135-134.465,17.239c-38.772,66.236-19.649,151.035-10.614,226.078l134.737,134.708
+                    	c130.388-6.923,234.886-111.407,241.831-241.79L374.71,132.922z'/>
+                    <g>
+                    	<path style='fill:#FFFFFF;' d='M315.227,109.468H196.772c-48.14,0-87.304,39.164-87.304,87.304v118.455
+                    		c0,48.138,39.164,87.305,87.305,87.305h118.455c48.138,0,87.305-39.165,87.305-87.305V196.772
+                    		C402.532,148.632,363.367,109.468,315.227,109.468L315.227,109.468z M373.05,315.228c0,31.934-25.888,57.822-57.822,57.822H196.773
+                    		c-31.934,0-57.822-25.888-57.822-57.822V196.773c0-31.934,25.888-57.823,57.822-57.823h118.455
+                    		c31.934,0,57.822,25.89,57.822,57.823V315.228z'/>
+                    	<path style='fill:#FFFFFF;' d='M256,180.202c-41.794,0-75.798,34.004-75.798,75.798c0,41.791,34.004,75.795,75.798,75.795
+                    		s75.795-34.001,75.795-75.795S297.794,180.202,256,180.202L256,180.202z M256,302.313c-25.579,0-46.316-20.733-46.316-46.313
+                    		s20.737-46.316,46.316-46.316s46.313,20.735,46.313,46.316C302.313,281.579,281.579,302.313,256,302.313L256,302.313z'/>
+                    </g>
+                    <g>
+                    	<path style='fill:#D1D1D1;' d='M350.103,180.774c0,10.03-8.132,18.163-18.163,18.163c-10.03,0-18.163-8.133-18.163-18.163
+                    		c0-10.031,8.133-18.163,18.163-18.163C341.973,162.611,350.103,170.741,350.103,180.774L350.103,180.774z'/>
+                    	<path style='fill:#D1D1D1;' d='M315.228,109.468h-59.802v29.482h59.802c31.934,0,57.822,25.89,57.822,57.823v118.455
+                    		c0,31.934-25.888,57.822-57.822,57.822h-59.802v29.482h59.802c48.138,0,87.304-39.165,87.304-87.305V196.772
+                    		C402.532,148.632,363.367,109.468,315.228,109.468z'/>
+                    	<path style='fill:#D1D1D1;' d='M256,180.202c-0.193,0-0.381,0.014-0.574,0.014v29.482c0.191-0.002,0.381-0.014,0.574-0.014
+                    		c25.579,0,46.313,20.735,46.313,46.316c0,25.579-20.733,46.313-46.313,46.313c-0.193,0-0.383-0.012-0.574-0.014v29.482
+                    		c0.193,0.002,0.381,0.014,0.574,0.014c41.794,0,75.795-34.002,75.795-75.795C331.795,214.206,297.794,180.202,256,180.202z'/>
+                    </g>
+                    </svg>")
+                RadiusBottomLeft: =100
+                RadiusBottomRight: =100
+                RadiusTopLeft: =100
+                RadiusTopRight: =100
+                Visible: =ButtonGallery.Selected.Name="Social"
+                Width: =55
+                X: =567
+                Y: =291
+                ZIndex: =73
+
+            WhatsAppBG As htmlViewer:
+                Height: =100
+                HtmlText: |-
+                    ="<div style='
+                      margin: 0;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:55%;
+                    height:55%px; 
+                    border-radius: 50%;
+                    background: linear-gradient(145deg, #3a4047, #444c55);
+                    box-shadow:  6px 6px 12px #23272b,
+                                 -1px -1px 3px #5d6773;'>
+                    </div>"
+                OnSelect: =
+                Visible: =ButtonGallery.Selected.Name="Social"
+                Width: =Self.Height
+                X: =427
+                Y: =269
+                ZIndex: =74
+
+            WhatsAppLogo As image:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderThickness: =5
+                Height: =55
+                HoverBorderColor: =RGBA(127, 178, 57, 1)
+                Image: |-
+                    ="data:image/svg+xml;utf8, "&EncodeUrl("<svg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px'
+                    	 viewBox='0 0 512 512' style='enable-background:new 0 0 512 512;' xml:space='preserve'>
+                    <circle style='fill:#75B73B;' cx='256' cy='256' r='256'/>
+                    <path style='fill:#52891D;' d='M360.241,151.826c-14.843-3.712-36.671-16.532-50.8-21.671
+                    	c-55.165-17.239-129.293-3.448-149.98,60.337c-1.724,1.724-5.172,1.724-6.896,1.724c-41.374,48.269-13.791,106.882-17.239,160.323
+                    	c-1.177,18.839-11.083,35.497-23.831,49.588l107.282,107.17C230.931,511.067,243.355,512,256,512
+                    	c126.436,0,231.452-91.665,252.247-212.161L360.241,151.826z'/>
+                    <g>
+                    	<path style='fill:#FFFFFF;' d='M248.837,108.447c-78.029,3.712-139.604,68.696-139.369,146.811
+                    		c0.072,23.792,5.816,46.249,15.95,66.095l-15.557,75.514c-0.841,4.086,2.843,7.663,6.901,6.701l73.995-17.53
+                    		c19.011,9.471,40.364,14.939,62.962,15.284c79.753,1.219,146.251-62.105,148.74-141.829
+                    		C405.121,174.035,334.591,104.362,248.837,108.447L248.837,108.447z M337.13,335.936c-21.669,21.669-50.483,33.604-81.13,33.604
+                    		c-17.944,0-35.126-4.027-51.066-11.966l-10.302-5.134l-45.37,10.747l9.549-46.356l-5.075-9.943
+                    		c-8.276-16.206-12.472-33.728-12.472-52.084c0-30.648,11.935-59.459,33.604-81.13c21.476-21.478,50.759-33.604,81.134-33.604
+                    		c30.644,0,59.458,11.935,81.127,33.604c21.669,21.669,33.604,50.483,33.604,81.127C370.735,285.177,358.607,314.459,337.13,335.936
+                    		L337.13,335.936z'/>
+                    	<path style='fill:#FFFFFF;' d='M327.115,286.582l-28.384-8.149c-3.729-1.069-7.749-0.01-10.468,2.76l-6.942,7.07
+                    		c-2.926,2.984-7.366,3.941-11.24,2.374c-13.427-5.434-41.672-30.548-48.881-43.106c-2.084-3.624-1.739-8.152,0.817-11.462
+                    		l6.058-7.839c2.374-3.07,2.874-7.197,1.305-10.747l-11.941-27.008c-2.86-6.468-11.126-8.352-16.527-3.784
+                    		c-7.921,6.701-17.32,16.88-18.461,28.16c-2.015,19.887,6.515,44.954,38.762,75.055c37.257,34.778,67.094,39.369,86.523,34.664
+                    		c11.019-2.667,19.825-13.365,25.379-22.126C336.906,296.467,333.91,288.535,327.115,286.582L327.115,286.582z'/>
+                    </g>
+                    <g>
+                    	<path style='fill:#D1D1D1;' d='M356.004,147.708l-22.223,22.778c1.131,1.045,2.257,2.096,3.351,3.191
+                    		c21.67,21.669,33.604,50.483,33.604,81.127c0,30.375-12.128,59.656-33.604,81.134c-21.669,21.669-50.483,33.604-81.13,33.604
+                    		c-17.944,0-35.125-4.027-51.066-11.966l-10.302-5.134l-45.37,10.747l0.938-4.553l-40.174,41.172
+                    		c0.886,2.663,3.705,4.475,6.734,3.758l73.995-17.53c19.011,9.471,40.364,14.939,62.962,15.284
+                    		c79.753,1.219,146.253-62.105,148.74-141.829C403.834,215.357,385.686,175.435,356.004,147.708z'/>
+                    	<path style='fill:#D1D1D1;' d='M327.115,286.582l-28.384-8.149c-3.729-1.069-7.749-0.01-10.468,2.76l-6.942,7.07
+                    		c-2.926,2.984-7.366,3.941-11.24,2.374c-7.756-3.139-20.451-12.845-31.185-22.904l-19.732,20.225
+                    		c0.677,0.648,1.352,1.295,2.05,1.948c37.257,34.778,67.094,39.369,86.523,34.664c11.019-2.667,19.825-13.365,25.379-22.126
+                    		C336.906,296.467,333.91,288.535,327.115,286.582z'/>
+                    </g>
+                    </svg>")
+                RadiusBottomLeft: =100
+                RadiusBottomRight: =100
+                RadiusTopLeft: =100
+                RadiusTopRight: =100
+                Visible: =ButtonGallery.Selected.Name="Social"
+                Width: =55
+                X: =449
+                Y: =291
+                ZIndex: =75
+
+            TwitterBG As htmlViewer:
+                Height: =100
+                HtmlText: |-
+                    ="<div style='
+                      margin: 0;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:55%;
+                    height:55%px; 
+                    border-radius: 50%;
+                    background: linear-gradient(145deg, #3a4047, #444c55);
+                    box-shadow:  6px 6px 12px #23272b,
+                                 -1px -1px 3px #5d6773;'>
+                    </div>"
+                OnSelect: =
+                Visible: =ButtonGallery.Selected.Name="Social"
+                Width: =Self.Height
+                X: =311
+                Y: =269
+                ZIndex: =76
+
+            TwitterLogo As image:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderThickness: =5
+                Height: =55
+                HoverBorderColor: =RGBA(102, 182, 227, 1)
+                Image: |-
+                    ="data:image/svg+xml;utf8, "&EncodeUrl("<svg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px'
+                    	 viewBox='0 0 512 512' style='enable-background:new 0 0 512 512;' xml:space='preserve'>
+                    <circle style='fill:#65A2D9;' cx='256' cy='256' r='256'/>
+                    <path style='fill:#3A7CA5;' d='M393.014,139.326c-26.703,23.169-53.253,43.475-74.954,71.852
+                    	c-53.381,64.372-118.613,155.7-207.386,142.086l158.61,158.396c134.456-6.873,241.497-117.493,242.686-253.376L393.014,139.326z'/>
+                    <path style='fill:#FFFFFF;' d='M397.872,162.471c-6.513,2.889-13.271,5.167-20.208,6.815c7.644-7.261,13.39-16.346,16.631-26.484
+                    	c0.926-2.893-2.219-5.398-4.832-3.848c-9.65,5.725-20.044,10.016-30.894,12.762c-0.628,0.16-1.276,0.24-1.929,0.24
+                    	c-1.979,0-3.896-0.733-5.411-2.065c-11.542-10.174-26.39-15.777-41.805-15.777c-6.672,0-13.405,1.04-20.016,3.091
+                    	c-20.487,6.353-36.295,23.254-41.257,44.103c-1.86,7.818-2.362,15.648-1.496,23.264c0.097,0.876-0.314,1.486-0.569,1.772
+                    	c-0.45,0.502-1.084,0.791-1.745,0.791c-0.072,0-0.15-0.003-0.224-0.01c-44.846-4.168-85.287-25.772-113.869-60.837
+                    	c-1.455-1.789-4.253-1.569-5.415,0.422c-5.596,9.606-8.554,20.589-8.554,31.766c0,17.127,6.884,33.27,18.837,45.039
+                    	c-5.027-1.193-9.893-3.07-14.414-5.582c-2.188-1.214-4.877,0.35-4.908,2.851c-0.31,25.445,14.588,48.087,36.905,58.282
+                    	c-0.45,0.01-0.9,0.014-1.35,0.014c-3.537,0-7.121-0.338-10.645-1.015c-2.463-0.467-4.532,1.867-3.768,4.253
+                    	c7.246,22.618,26.717,39.288,50.021,43.07c-19.339,12.983-41.863,19.83-65.302,19.83l-7.306-0.003c-2.255,0-4.16,1.469-4.73,3.65
+                    	c-0.565,2.145,0.474,4.413,2.396,5.53c26.412,15.372,56.541,23.495,87.138,23.495c26.784,0,51.838-5.313,74.466-15.798
+                    	c20.745-9.609,39.076-23.345,54.486-40.827c14.357-16.286,25.581-35.085,33.365-55.879c7.418-19.816,11.34-40.967,11.34-61.154
+                    	v-0.964c0-3.241,1.465-6.291,4.024-8.37c9.706-7.882,18.16-17.158,25.122-27.572C403.796,164.578,400.896,161.13,397.872,162.471
+                    	L397.872,162.471z'/>
+                    <path style='fill:#D1D1D1;' d='M397.872,162.471c-6.515,2.889-13.271,5.167-20.208,6.815c7.644-7.261,13.39-16.346,16.632-26.484
+                    	c0.926-2.893-2.219-5.398-4.832-3.848c-9.65,5.725-20.044,10.016-30.894,12.762c-0.628,0.16-1.276,0.24-1.929,0.24
+                    	c-1.979,0-3.896-0.733-5.411-2.065c-11.542-10.174-26.39-15.777-41.805-15.777c-6.671,0-13.405,1.04-20.016,3.091
+                    	c-14.322,4.441-26.343,14.048-33.985,26.546v205.477c6.222-2.029,12.293-4.403,18.198-7.139
+                    	c20.745-9.609,39.076-23.345,54.486-40.827c14.357-16.287,25.581-35.085,33.365-55.879c7.418-19.816,11.34-40.967,11.34-61.154
+                    	v-0.964c0-3.241,1.465-6.291,4.024-8.37c9.706-7.882,18.16-17.158,25.122-27.572C403.796,164.578,400.896,161.13,397.872,162.471z'
+                    	/>
+                    </svg>
+                    ")
+                RadiusBottomLeft: =100
+                RadiusBottomRight: =100
+                RadiusTopLeft: =100
+                RadiusTopRight: =100
+                Visible: =ButtonGallery.Selected.Name="Social"
+                Width: =55
+                X: =333
+                Y: =291
+                ZIndex: =77
+
+        BigPlayIcon As image:
+            Height: =100*0.7
+            HoverFill: =RGBA(0, 0, 0, 0.2)
+            Image: |-
+                =If(IsBlank(pauseSong),"data:image/svg+xml;utf8, "&EncodeUrl("<svg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px'
+                	 viewBox='0 0 47.607 47.607' style='enable-background:new 0 0 47.607 47.607;' xml:space='preserve'>
+                <g>
+                	<path d='M17.991,40.976c0,3.662-2.969,6.631-6.631,6.631l0,0c-3.662,0-6.631-2.969-6.631-6.631V6.631C4.729,2.969,7.698,0,11.36,0
+                		l0,0c3.662,0,6.631,2.969,6.631,6.631V40.976z' fill='#37E2D5'/>
+                	<path d='M42.877,40.976c0,3.662-2.969,6.631-6.631,6.631l0,0c-3.662,0-6.631-2.969-6.631-6.631V6.631
+                		C29.616,2.969,32.585,0,36.246,0l0,0c3.662,0,6.631,2.969,6.631,6.631V40.976z' fill='#37E2D5'/>
+                </g>
+                </svg>"),"data:image/svg+xml;utf8, "&EncodeUrl("<svg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px'
+                	 viewBox='0 0 494.148 494.148' style='enable-background:new 0 0 494.148 494.148;' xml:space='preserve'>
+                <g>
+                	<g>
+                		<path d='M405.284,201.188L130.804,13.28C118.128,4.596,105.356,0,94.74,0C74.216,0,61.52,16.472,61.52,44.044v406.124
+                			c0,27.54,12.68,43.98,33.156,43.98c10.632,0,23.2-4.6,35.904-13.308l274.608-187.904c17.66-12.104,27.44-28.392,27.44-45.884
+                			C432.632,229.572,422.964,213.288,405.284,201.188z' fill='#B9BEC4'/>
+                	</g>
+                </g>
+                </svg>"))
+            OnSelect: =If(IsBlank(pauseSong),Set(pauseSong,1),Set(pauseSong,Blank()));
+            PaddingBottom: =20
+            PaddingLeft: =22
+            PaddingRight: =20
+            PaddingTop: =20
+            RadiusBottomLeft: =100
+            RadiusBottomRight: =100
+            RadiusTopLeft: =100
+            RadiusTopRight: =100
+            Width: =100*0.7
+            X: =326
+            Y: =1193
+            ZIndex: =87
+
+        SongPlayer As audioPlayback:
+            Media: =playSong.SongFile.Value
+            Start: =IsBlank(pauseSong)
+            Visible: =false
+            X: =40
+            Y: =40
+            ZIndex: =88
+
+        grpDiscover As group:
+            Height: =5
+            Width: =5
+            X: =60
+            Y: =60
+            ZIndex: =91
+
+            SearchDiscoverGallery As gallery.galleryHorizontal:
+                Height: =265
+                Items: |-
+                    =Table({Name:"",Hook:"Its was acceptable in the "&First(SearchGallery.AllItems).Decade,Colour:""},{Name:"",Hook:First(SearchGallery.AllItems).Genre&" Top 100",Color:""},{Name:"",Hook:"The Best of "&First(SearchGallery.AllItems).Country,Colour:""})
+                ShowScrollbar: =false
+                TemplatePadding: =0
+                TemplateSize: =If(Self.Layout = Layout.Horizontal, Min(320, Self.Width - 60), Min(320, Self.Height - 60))
+                Visible: =ButtonGallery.Selected.Name="Discover"
+                Width: =575
+                X: =143
+                Y: =755
+                ZIndex: =78
+
+                SearchDiscoverCard As htmlViewer:
+                    Height: =Parent.TemplateHeight
+                    HtmlText: |-
+                        ="<div style='
+                        margin:20px;
+                        position: absolute;
+                        width:260px;
+                        height:190px; 
+                        border-radius: 18px;
+                        background: rgb(55,226,213);
+                        background: linear-gradient(135deg, rgba(55,226,213,1) 0%, rgba(26,98,93,1) 100%);
+                        box-shadow:  10px 10px 15px #23272b;'>
+                        </div>"
+                    OnSelect: =Select(Parent)
+                    Width: =Parent.TemplateWidth
+                    ZIndex: =1
+
+                SearchDiscoverScrim As image:
+                    Height: =190
+                    Image: |-
+                        ="data:image/svg+xml;utf8, "&EncodeUrl("<svg width='100%' height='100%' id='svg' viewBox='0 0 1440 500' xmlns='http://www.w3.org/2000/svg' class='transition duration-300 ease-in-out delay-150'><defs><linearGradient id='gradient' x1='54%' y1='0%' x2='46%' y2='100%'><stop offset='5%' stop-color='#002bdc88'></stop><stop offset='95%' stop-color='#32ded488'></stop></linearGradient></defs><path d='M 0,500 C 0,500 0,166 0,166 C 38.875109043326546,151.87495043485157 77.75021808665309,137.74990086970314 134,140 C 190.2497819133469,142.25009913029686 263.87423669671415,160.87534695603898 309,161 C 354.12576330328585,161.12465304396102 370.75283512649025,142.74871130614082 416,143 C 461.24716487350975,143.25128869385918 535.1144227973249,162.12980781939783 584,170 C 632.8855772026751,177.87019218060217 656.7894736842105,174.73205741626796 697,185 C 737.2105263157895,195.26794258373204 793.727682465833,218.9419625155304 851,213 C 908.272317534167,207.0580374844696 966.2997964524573,171.5000925216104 1021,146 C 1075.7002035475427,120.49990747838959 1127.0731317243383,105.05766739802796 1174,110 C 1220.9268682756617,114.94233260197204 1263.407676650189,140.26923788627772 1307,153 C 1350.592323349811,165.73076211372228 1395.2961616749055,165.86538105686114 1440,166 C 1440,166 1440,500 1440,500 Z' stroke='none' stroke-width='0' fill='url(#gradient)' class='transition-all duration-300 ease-in-out delay-150 path-0'></path><defs><linearGradient id='gradient' x1='54%' y1='0%' x2='46%' y2='100%'><stop offset='5%' stop-color='#002bdcff'></stop><stop offset='95%' stop-color='#32ded4ff'></stop></linearGradient></defs><path d='M 0,500 C 0,500 0,333 0,333 C 41.87591530307438,295.99722435168786 83.75183060614876,258.9944487033757 135,278 C 186.24816939385124,297.0055512966243 246.86859287847943,372.01942953818497 300,390 C 353.13140712152057,407.98057046181503 398.77379787993345,368.9278331438843 444,351 C 489.22620212006655,333.0721668561157 534.0362156017869,336.2692378862777 576,340 C 617.9637843982131,343.7307621137223 657.0813397129186,347.9952153110048 699,336 C 740.9186602870814,324.0047846889952 785.6384255465384,295.74990086970314 837,308 C 888.3615744534616,320.25009913029686 946.3649581009279,373.0051812101826 996,387 C 1045.6350418990721,400.9948187898174 1086.9017420497503,376.2293742895662 1135,356 C 1183.0982579502497,335.7706257104338 1238.0280737000714,320.07732163155254 1290,317 C 1341.9719262999286,313.92267836844746 1390.9859631499644,323.46133918422373 1440,333 C 1440,333 1440,500 1440,500 Z' stroke='none' stroke-width='0' fill='url(#gradient)' class='transition-all duration-300 ease-in-out delay-150 path-1'></path></svg>")
+                    ImagePosition: =ImagePosition.Fill
+                    OnSelect: =Select(Parent)
+                    RadiusBottomLeft: =18
+                    RadiusBottomRight: =18
+                    Width: =260
+                    X: =25
+                    Y: =25
+                    ZIndex: =3
+
+                SearchDiscoverHook As htmlViewer:
+                    Font: ="Agency FB"
+                    HtmlText: |-
+                        ="<div style='position:relative;
+                                padding-left:10px;
+                                color: #FFFFFF;
+                                font-size: 16px;
+                                text-shadow: 2px 2px 2px #000;'>" & ThisItem.Name & "</div>"
+                    Width: =260
+                    X: =24
+                    Y: =30
+                    ZIndex: =4
+
+                SearchDiscoverTitle As htmlViewer:
+                    Font: ="Agency FB"
+                    HtmlText: |-
+                        ="<div style='position:relative;
+                                border-radius:20px;
+                                padding-left:10px;
+                                color: #FFFFFF;
+                                font-size: 22px;
+                                text-shadow: 2px 2px 2px #000;'>" & ThisItem.Hook & "</div>"
+                    Width: =260
+                    X: =24
+                    Y: =175
+                    ZIndex: =5
+
+            RecommendedSearch As htmlViewer:
+                AutoHeight: =true
+                Font: ="Agency FB"
+                Height: =67
+                HtmlText: |-
+                    ="<div style='position:relative;
+                            color: #FFFFFF;
+                            font-size: 32px;
+                            text-shadow: 4px 4px 8px #23272b;
+                    '>" & "Featuring "&First(SearchGallery.AllItems).Artist&"..." & "</div>"
+                Size: =16
+                Visible: =ButtonGallery.Selected.Name="Discover"
+                Width: =554
+                X: =163
+                Y: =708
+                ZIndex: =79
+
+            SearchBar As htmlViewer:
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =100
+                HtmlText: |-
+                    ="<div style='
+                      margin: 0;
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    width:90%;
+                    height:60%; 
+                    border-radius: 40px;
+                    background: #40474f;
+                    box-shadow: inset 6px 6px 12px #23272b,
+                                inset -6px -6px 12px #5d6773;'>
+                    </div>"
+                Visible: =ButtonGallery.Selected.Name="Discover"
+                Width: =500
+                X: =182
+                Y: =275
+                ZIndex: =80
+
+            SearchGallery As gallery.galleryVertical:
+                Height: =333
+                Items: =Filter(SortByColumns(musicplayersongs,"crbfe_albumname",Ascending),SearchText.Text in Name || SearchText.Text in Artist || SearchText.Text in AlbumName)
+                Layout: =Layout.Vertical
+                ShowScrollbar: =false
+                TemplateSize: =100
+                Visible: =ButtonGallery.Selected.Name="Discover"
+                Width: =530
+                X: =160
+                Y: =375
+                ZIndex: =81
+
+                SearchLikeBG As htmlViewer:
+                    Height: =Parent.TemplateHeight
+                    HtmlText: |-
+                        ="<div style='
+                          margin: 0;
+                          position: absolute;
+                          top: 50%;
+                          left: 50%;
+                          transform: translate(-50%, -50%);
+                        width:40%;
+                        height:40%px; 
+                        border-radius: 50%;
+                        background: linear-gradient(145deg, #3a4047, #444c55);
+                        box-shadow:  3px 3px 6px #23272b,
+                                     -1px -1px 3px #5d6773;'>
+                        </div>"
+                    OnSelect: =Select(Parent)
+                    Width: =Self.Height
+                    ZIndex: =1
+
+                SearchSong As label:
+                    AutoHeight: =true
+                    Color: =RGBA(255, 255, 255, 1)
+                    Font: ="Agency FB"
+                    FontWeight: =FontWeight.Semibold
+                    Height: =60
+                    Size: =16
+                    Text: =ThisItem.Name
+                    Width: =Parent.TemplateWidth-(Self.X*2)
+                    X: =90
+                    Y: =20
+                    ZIndex: =3
+
+                SearchArtist As label:
+                    AutoHeight: =true
+                    Color: =RGBA(255, 255, 255, 1)
+                    Font: ="Agency FB"
+                    Height: =60
+                    Text: =ThisItem.Artist
+                    Width: =Parent.TemplateWidth-(Self.X*2)
+                    X: =90
+                    Y: =50
+                    ZIndex: =4
+
+                SearchLiked As image:
+                    AutoDisableOnSelect: =false
+                    DisabledFill: =RGBA(0, 0, 0, 0)
+                    Height: =100*0.4
+                    HoverFill: =RGBA(0, 0, 0, 0.2)
+                    Image: |-
+                        ="data:image/svg+xml;utf8, "&EncodeUrl("<svg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px'
+                        	 viewBox='0 0 51.997 51.997' style='enable-background:new 0 0 51.997 51.997;' xml:space='preserve'>
+                        <path d='M51.911,16.242C51.152,7.888,45.239,1.827,37.839,1.827c-4.93,0-9.444,2.653-11.984,6.905
+                        	c-2.517-4.307-6.846-6.906-11.697-6.906c-7.399,0-13.313,6.061-14.071,14.415c-0.06,0.369-0.306,2.311,0.442,5.478
+                        	c1.078,4.568,3.568,8.723,7.199,12.013l18.115,16.439l18.426-16.438c3.631-3.291,6.121-7.445,7.199-12.014
+                        	C52.216,18.553,51.97,16.611,51.911,16.242z' fill='#37E2D5'/>
+                        </svg>")
+                    OnSelect: |-
+                        =Patch(musicplayersongs,ThisItem,{Liked:false,RowNumber:Blank()})
+                    PaddingBottom: =13
+                    PaddingLeft: =13
+                    PaddingRight: =13
+                    PaddingTop: =13
+                    PressedFill: =
+                    RadiusBottomLeft: =100
+                    RadiusBottomRight: =100
+                    RadiusTopLeft: =100
+                    RadiusTopRight: =100
+                    Tooltip: ="Remove from Library"
+                    Visible: =ThisItem.Liked
+                    Width: =100*0.4
+                    X: =30
+                    Y: =30
+                    ZIndex: =9
+
+                SearchNotLiked As image:
+                    AutoDisableOnSelect: =false
+                    DisabledFill: =RGBA(0, 0, 0, 0)
+                    Height: =100*0.4
+                    HoverFill: =RGBA(0, 0, 0, 0.2)
+                    Image: |-
+                        ="data:image/svg+xml;utf8, "&EncodeUrl("<svg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px'
+                        	 viewBox='0 0 51.997 51.997' style='enable-background:new 0 0 51.997 51.997;' xml:space='preserve'>
+                        <path d='M51.911,16.242C51.152,7.888,45.239,1.827,37.839,1.827c-4.93,0-9.444,2.653-11.984,6.905
+                        	c-2.517-4.307-6.846-6.906-11.697-6.906c-7.399,0-13.313,6.061-14.071,14.415c-0.06,0.369-0.306,2.311,0.442,5.478
+                        	c1.078,4.568,3.568,8.723,7.199,12.013l18.115,16.439l18.426-16.438c3.631-3.291,6.121-7.445,7.199-12.014
+                        	C52.216,18.553,51.97,16.611,51.911,16.242z' fill='#B9BEC4'/>
+                        </svg>")
+                    OnSelect: |-
+                        =Patch(musicplayersongs,ThisItem,{Liked:true,RowNumber:First(SortByColumns(musicplayersongs,"crbfe_rownumber",Descending)).RowNumber+1})
+                    PaddingBottom: =13
+                    PaddingLeft: =13
+                    PaddingRight: =13
+                    PaddingTop: =13
+                    PressedFill: =
+                    RadiusBottomLeft: =100
+                    RadiusBottomRight: =100
+                    RadiusTopLeft: =100
+                    RadiusTopRight: =100
+                    Tooltip: ="Add to Library"
+                    Visible: =!ThisItem.Liked
+                    Width: =100*0.4
+                    X: =30
+                    Y: =30
+                    ZIndex: =10
+
+            SearchPlaceholder As label:
+                Color: =RGBA(185, 190, 196,0.2)
+                Font: ="Agency FB"
+                FontWeight: =FontWeight.Semibold
+                Size: =16
+                Text: ="Search"
+                Visible: =ButtonGallery.Selected.Name="Discover"&&SearchText.Text=""
+                Width: =100
+                X: =229
+                Y: =305
+                ZIndex: =89
+
+            SearchText As text:
+                BorderStyle: =BorderStyle.None
+                Color: =RGBA(255, 255, 255, 1)
+                Default: =""
+                Fill: =RGBA(0, 0, 0, 0)
+                Font: ="Agency FB"
+                Height: =100*0.6
+                HoverColor: =Self.Color
+                HoverFill: =RGBA(185, 190, 196,0.05)
+                PaddingLeft: =25
+                RadiusBottomLeft: =40
+                RadiusBottomRight: =40
+                RadiusTopLeft: =40
+                RadiusTopRight: =40
+                Size: =16
+                Visible: =ButtonGallery.Selected.Name="Discover"
+                Width: =500*0.9
+                X: =207
+                Y: =295
+                ZIndex: =90
+

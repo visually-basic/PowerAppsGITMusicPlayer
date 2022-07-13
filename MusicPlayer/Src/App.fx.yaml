@@ -1,0 +1,24 @@
+App As appinfo:
+    BackEnabled: =false
+    OnStart: |-
+        =Set(
+            varLevel1,
+            3
+        );
+        Set(
+            varLevel2,
+            3
+        );
+        Set(
+            varLevel3,
+            3
+        );
+        Set(
+            varLevel4,
+            3
+        );
+        Set(
+            varLevel5,
+            3
+        )
+
